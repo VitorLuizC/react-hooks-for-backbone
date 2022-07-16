@@ -26,6 +26,9 @@ function createOutputOptions(options) {
     name: 'ReactHooksForBackbone',
     exports: 'named',
     sourcemap: true,
+    globals: {
+      react: 'React',
+    },
     ...options,
   };
 }
