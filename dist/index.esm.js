@@ -4,25 +4,18 @@
  * Released under the MIT License.
  */
 
-/**
- * Check if value is parseable to number.
- * @example
- * ```js
- * isNumberParseable('AAAA');
- * //=> false
- *
- * isNumberParseable('100');
- * //=> true
- *
- * if (!isNumberParseable(value))
- *   throw new Error('Value can\'t be parseable to `Number`.')
- * return Number(value);
- * ```
- * @param value - An `unknown` value to be checked.
- */
-var isNumberParseable = function (value) {
-    return !Number.isNaN(Number(value));
-};
+import { useRef, useEffect, useCallback } from 'react';
 
-export { isNumberParseable };
+/** React.js Hook that provides a function to check if component is mounted. */
+function useMounted() {
+    var mountedRef = useRef(true);
+    useEffect(function () {
+        return function () {
+            mountedRef.current = false;
+        };
+    }, []);
+    return useCallback(function () { return mountedRef.current; }, []);
+}
+
+export { useMounted };
 //# sourceMappingURL=index.esm.js.map

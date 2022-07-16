@@ -5,32 +5,23 @@
  */
 
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global["ReactHooksForBackbone"] = {}));
-})(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.ReactHooksForBackbone = {}, global.React));
+})(this, (function (exports, react) { 'use strict';
 
-  /**
-   * Check if value is parseable to number.
-   * @example
-   * ```js
-   * isNumberParseable('AAAA');
-   * //=> false
-   *
-   * isNumberParseable('100');
-   * //=> true
-   *
-   * if (!isNumberParseable(value))
-   *   throw new Error('Value can\'t be parseable to `Number`.')
-   * return Number(value);
-   * ```
-   * @param value - An `unknown` value to be checked.
-   */
-  var isNumberParseable = function (value) {
-      return !Number.isNaN(Number(value));
-  };
+  /** React.js Hook that provides a function to check if component is mounted. */
+  function useMounted() {
+      var mountedRef = react.useRef(true);
+      react.useEffect(function () {
+          return function () {
+              mountedRef.current = false;
+          };
+      }, []);
+      return react.useCallback(function () { return mountedRef.current; }, []);
+  }
 
-  exports.isNumberParseable = isNumberParseable;
+  exports.useMounted = useMounted;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
