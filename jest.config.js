@@ -8,6 +8,7 @@
 const options = {
   preset: 'ts-jest',
   resolver: 'ts-jest-resolver',
+  testEnvironment: 'jsdom',
 };
 
 module.exports = options;
