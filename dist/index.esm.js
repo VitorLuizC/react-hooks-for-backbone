@@ -1,6 +1,6 @@
 /*!
- * [libraryName] v0.0.0
- * (c) [authorFullName]
+ * react-hooks-for-backbone v0.0.0
+ * (c) Vitor Luiz Cavalcanti
  * Released under the MIT License.
  */
 

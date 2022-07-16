@@ -1,6 +1,6 @@
 {
   "out": "./docs",
-  "name": "[libraryNameWithSpacesAndUpperCases]",
+  "name": "React.js Hooks for Backbone.js",
   "theme": "markdown",
   "readme": "none",
   "tsconfig": "./tsconfig.bundle.json"

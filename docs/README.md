@@ -1,6 +1,6 @@
-[libraryNameWithSpacesAndUpperCases]
+React.js Hooks for Backbone.js
 
-# [libraryNameWithSpacesAndUpperCases]
+# React.js Hooks for Backbone.js
 
 ## Table of contents
 
