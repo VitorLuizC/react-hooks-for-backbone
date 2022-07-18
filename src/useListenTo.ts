@@ -49,6 +49,8 @@ function useListenTo<TObject extends Events>(
   const handler = useHandler(callback);
 
   useLayoutEffect(() => {
+    if (!events) return;
+
     listener.listenTo(object, events, handler);
 
     return () => {
