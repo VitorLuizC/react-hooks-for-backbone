@@ -2,11 +2,13 @@ import { act, renderHook } from '@testing-library/react';
 import { Model } from 'backbone';
 import useListenTo from './useListenTo';
 
+type User = Model<{
+  name: string;
+  isActive: boolean;
+}>;
+
 describe('useListenTo', () => {
-  let user: Model<{
-    name: string;
-    isActive: boolean;
-  }>;
+  let user: User;
   let handler: jest.Mock;
 
   beforeEach(() => {
@@ -17,12 +19,31 @@ describe('useListenTo', () => {
     });
   });
 
-  it("listens model's event and execute the callback", () => {
+  it("listens object's event and execute the callback", () => {
     renderHook(() => {
       useListenTo(user, 'change:name', handler);
     });
 
     expect(handler).not.toHaveBeenCalled();
+
+    act(() => {
+      user.set('name', 'Mob');
+    });
+
+    expect(handler).toHaveBeenCalled();
+  });
+
+  it('binds object as context to the callback', () => {
+    const handleNameChange = jest.fn(
+      // A regular function was used to allow context bound.
+      function handleNameChange(this: User) {
+        expect(this).toBe(user);
+      },
+    );
+
+    renderHook(() => {
+      useListenTo(user, 'change:name', handleNameChange);
+    });
 
     act(() => {
       user.set('name', 'Mob');
