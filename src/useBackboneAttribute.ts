@@ -27,7 +27,7 @@ import useUpdate from './utils/useUpdate.js';
  * });
  * ```
  */
-type BackboneAttributeUpdate<
+export type BackboneAttributeUpdate<
   TAttributes,
   TKey extends string & keyof TAttributes,
   TOptions = ModelSetOptions,
