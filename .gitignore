@@ -28,3 +28,7 @@ pnpmfile.js
 # Log files.
 *.log
 *.log.*
+
+# Coverage files.
+# Generated test coverage reports.
+/coverage
