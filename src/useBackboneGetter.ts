@@ -15,7 +15,7 @@ import useBackboneEventListener from './useBackboneEventListener.js';
  * };
  * ```
  */
-export type GetterFunction<
+export type BackboneGetterFunction<
   TResult,
   TObject extends Events,
   TValues extends unknown[] = [],
@@ -37,7 +37,7 @@ export type GetterFunction<
  * }
  * ```
  */
-export type GetterOptions<
+export type BackboneGetterOptions<
   TObject extends Events,
   TValues extends unknown[] = [],
 > = {
@@ -78,13 +78,13 @@ export type GetterOptions<
  * });
  * ```
  */
-function useGetter<
+function useBackboneGetter<
   TResult,
   TObject extends Events,
   TValues extends unknown[] = [],
 >(
-  getter: GetterFunction<TResult, TObject, TValues>,
-  options: GetterOptions<TObject, TValues>,
+  getter: BackboneGetterFunction<TResult, TObject, TValues>,
+  options: BackboneGetterOptions<TObject, TValues>,
 ) {
   const { object, watch: { values = [], events = [] } = {} } = options;
 
@@ -103,4 +103,4 @@ function useGetter<
   return result;
 }
 
-export default useGetter;
+export default useBackboneGetter;
