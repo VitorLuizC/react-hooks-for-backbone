@@ -10,7 +10,9 @@ import useBackboneEventListener from './useBackboneEventListener.js';
  * @example
  *
  * ```ts
- * const getAvatar: GetterFunction<Model<User>, [AppDetails]> = (user, app) => {
+ * let getAvatar: BackboneGetterFunction<Model<User>, [AppDetails]>;
+ *
+ * getAvatar = (user, app) => {
  *   return `${app.baseUrl}/avatar/${user.get('companyId')}/${user.get('id')}`;
  * };
  * ```
@@ -28,7 +30,7 @@ export type BackboneGetterFunction<
  * @example
  *
  * ```ts
- * const options: GetterOptions<Model<User>, [AppDetails]> = {
+ * const options: BackboneGetterOptions<Model<User>, [AppDetails]> = {
  *   model: user,
  *   watch: {
  *     values: [app],
@@ -70,7 +72,7 @@ export type BackboneGetterOptions<
  *   return user.get('first_name') + ' ' + user.get('last_name');
  * }
  *
- * const fullName = useGetter(getFullName, {
+ * const fullName = useBackboneGetter(getFullName, {
  *   object: user,
  *   watch: {
  *     events: ['sync', 'change'],
