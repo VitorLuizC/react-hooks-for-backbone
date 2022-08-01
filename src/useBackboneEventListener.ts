@@ -1,6 +1,6 @@
 import type { Events } from 'backbone';
 import { useEffect } from 'react';
-import useHandler from './utils/useHandler';
+import useHandler from './utils/useHandler.js';
 
 /**
  * React.js Hook that listens model's, or collection's, events and execute the

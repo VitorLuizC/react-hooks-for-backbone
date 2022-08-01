@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react';
-import type AnyFunction from '../types/AnyFunction';
+import type AnyFunction from '../types/AnyFunction.js';
 
 /**
  * React.js Hook that provides a handler function that persists its reference,

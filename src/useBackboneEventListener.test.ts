@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { Model } from 'backbone';
-import useBackboneEventListener from './useBackboneEventListener';
+import useBackboneEventListener from './useBackboneEventListener.js';
 
 type User = Model<{
   name: string;

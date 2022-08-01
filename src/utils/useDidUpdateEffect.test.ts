@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useDidUpdateEffect from './useDidUpdateEffect';
+import useDidUpdateEffect from './useDidUpdateEffect.js';
 
 describe('useDidUpdateEffect', () => {
   it('only runs the effect when component updates', () => {

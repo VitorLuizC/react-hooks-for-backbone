@@ -1,6 +1,6 @@
 export type {
   BackboneGetterFunction,
   BackboneGetterOptions,
-} from './useBackboneGetter';
-export { default as useBackboneEventListener } from './useBackboneEventListener';
-export { default as useBackboneGetter } from './useBackboneGetter';
+} from './useBackboneGetter.js';
+export { default as useBackboneEventListener } from './useBackboneEventListener.js';
+export { default as useBackboneGetter } from './useBackboneGetter.js';
