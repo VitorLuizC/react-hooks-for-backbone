@@ -1,13 +1,13 @@
 import { act, renderHook } from '@testing-library/react';
 import { Model } from 'backbone';
-import useListenTo from './useListenTo';
+import useBackboneEventListener from './useBackboneEventListener';
 
 type User = Model<{
   name: string;
   isActive: boolean;
 }>;
 
-describe('useListenTo', () => {
+describe('useBackboneEventListener', () => {
   let user: User;
   let handler: jest.Mock;
 
@@ -21,7 +21,7 @@ describe('useListenTo', () => {
 
   it("listens object's event and execute the callback", () => {
     renderHook(() => {
-      useListenTo(user, 'change:name', handler);
+      useBackboneEventListener(user, 'change:name', handler);
     });
 
     expect(handler).not.toHaveBeenCalled();
@@ -33,29 +33,28 @@ describe('useListenTo', () => {
     expect(handler).toHaveBeenCalled();
   });
 
-  it('binds object as context to the callback', () => {
+  it('binds object as context to the callback', (done) => {
     const handleNameChange = jest.fn(
       // A regular function was used to allow context bound.
       function handleNameChange(this: User) {
         expect(this).toBe(user);
+        done();
       },
     );
 
     renderHook(() => {
-      useListenTo(user, 'change:name', handleNameChange);
+      useBackboneEventListener(user, 'rename', handleNameChange);
     });
 
     act(() => {
-      user.set('name', 'Mob');
+      user.trigger('rename', 'Mob');
     });
-
-    expect(handler).toHaveBeenCalled();
   });
 
   describe('when component unmounts', () => {
     it("stops listening the model's event", () => {
       const { unmount } = renderHook(() => {
-        useListenTo(user, 'change:name', handler);
+        useBackboneEventListener(user, 'change:name', handler);
       });
 
       expect(handler).not.toHaveBeenCalled();

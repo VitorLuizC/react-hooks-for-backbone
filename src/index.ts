@@ -1,1 +1,1 @@
-export { default as useListenTo } from './useListenTo';
+export { default as useBackboneEventListener } from './useBackboneEventListener';

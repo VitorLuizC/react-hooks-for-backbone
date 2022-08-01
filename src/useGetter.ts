@@ -1,7 +1,7 @@
 import type { Events } from 'backbone';
 import { useEffect, useState } from 'react';
-import useHandler from './useHandler.js';
-import useListenTo from './useListenTo.js';
+import useHandler from './utils/useHandler.js';
+import useBackboneEventListener from './useBackboneEventListener.js';
 
 /**
  * Function that uses a model, or a collection, and a list of values as
@@ -98,7 +98,7 @@ function useGetter<
 
   useEffect(updateResult, [object, ...values]);
 
-  useListenTo(object, events, updateResult);
+  useBackboneEventListener(object, events, updateResult);
 
   return result;
 }
