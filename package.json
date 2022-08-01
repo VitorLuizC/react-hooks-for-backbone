@@ -1,7 +1,7 @@
 {
   "name": "react-hooks-for-backbone",
   "version": "0.0.0",
-  "description": "",
+  "description": "React.js Hooks to connect your components with Backbone.js models, events and collections.",
   "cdn": "dist/index.umd.js",
   "main": "dist/index.js",
   "types": "types/index.d.ts",

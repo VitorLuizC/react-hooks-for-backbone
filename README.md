@@ -6,6 +6,8 @@
 [![Package minified & gzipped size](https://badgen.net/bundlephobia/minzip/react-hooks-for-backbone)](https://bundlephobia.com/package/react-hooks-for-backbone)
 [![Package dependency count](https://badgen.net/bundlephobia/dependency-count/reactreact-hooks-for-backbone)](https://bundlephobia.com/package/react-hooks-for-backbone)
 
+React.js Hooks to connect your components with Backbone.js models, events and collections.
+
 ## Installation
 
 This library is published in the NPM registry and can be installed using any compatible package manager.
