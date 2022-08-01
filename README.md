@@ -4,7 +4,7 @@
 [![License](https://badgen.net/github/license/VitorLuizC/react-hooks-for-backbone)](./LICENSE)
 [![Package tree-shaking](https://badgen.net/bundlephobia/tree-shaking/react-hooks-for-backbone)](https://bundlephobia.com/package/react-hooks-for-backbone)
 [![Package minified & gzipped size](https://badgen.net/bundlephobia/minzip/react-hooks-for-backbone)](https://bundlephobia.com/package/react-hooks-for-backbone)
-[![Package dependency count](https://badgen.net/bundlephobia/dependency-count/reactreact-hooks-for-backbone)](https://bundlephobia.com/package/react-hooks-for-backbone)
+[![Package dependency count](https://badgen.net/bundlephobia/dependency-count/react-hooks-for-backbone)](https://bundlephobia.com/package/react-hooks-for-backbone)
 
 React.js Hooks to connect your components with Backbone.js models, events and collections.
 
