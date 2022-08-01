@@ -32,3 +32,7 @@ pnpmfile.js
 # Coverage files.
 # Generated test coverage reports.
 /coverage
+
+# Generated bundles and type definitions.
+dist/
+types/
