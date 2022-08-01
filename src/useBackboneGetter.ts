@@ -1,7 +1,7 @@
 import type { Events } from 'backbone';
-import { useEffect, useState } from 'react';
-import useHandler from './utils/useHandler.js';
+import { useMemo } from 'react';
 import useBackboneEventListener from './useBackboneEventListener.js';
+import useUpdate from './utils/useUpdate.js';
 
 /**
  * Function that uses a model, or a collection, and a list of values as
@@ -57,8 +57,8 @@ export type BackboneGetterOptions<
  *
  * @remarks
  *
- * ⚠️ it doesn't react to getter function's change, only to 'object' and the
- * watched 'values' and 'events'.
+ * ⚠️ it doesn't react to `getter` function's change, only to `object` and the
+ * watched `values` and `events`' changes.
  *
  * @example
  *
@@ -87,22 +87,16 @@ function useBackboneGetter<
 >(
   getter: BackboneGetterFunction<TResult, TObject, TValues>,
   options: BackboneGetterOptions<TObject, TValues>,
-) {
+): TResult {
   const { object, watch: { values = [], events = [] } = {} } = options;
 
-  const getResult = useHandler(() => {
+  const [updateId, update] = useUpdate();
+
+  useBackboneEventListener(object, events, update);
+
+  return useMemo(() => {
     return getter(object, ...(values as TValues));
-  });
-
-  const [result, setResult] = useState(getResult);
-
-  const updateResult = () => setResult(getResult);
-
-  useEffect(updateResult, [object, ...values]);
-
-  useBackboneEventListener(object, events, updateResult);
-
-  return result;
+  }, [object, updateId, ...values]);
 }
 
 export default useBackboneGetter;
