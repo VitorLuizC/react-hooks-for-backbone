@@ -1,6 +1,9 @@
 import type { Events } from 'backbone';
 import { useMemo } from 'react';
 import useBackboneEventListener from './useBackboneEventListener.js';
+import useBackboneListenTo, {
+  BackboneEventSubjects,
+} from './useBackboneListenTo.js';
 import useUpdate from './utils/useUpdate.js';
 
 /**
@@ -34,7 +37,8 @@ export type BackboneGetterFunction<
  *   object: user,
  *   watchEvents: ['change:companyId'],
  *   watchValues: [app],
- * }
+ *   watchRelatedEvents: [app, 'change:base_url'],
+ * };
  * ```
  */
 export type BackboneGetterOptions<
@@ -44,6 +48,7 @@ export type BackboneGetterOptions<
   object: TObject;
   watchEvents?: string[];
   watchValues?: TValues;
+  watchRelatedEvents?: BackboneEventSubjects;
 };
 
 /**
@@ -82,9 +87,16 @@ function useBackboneGetter<
   getter: BackboneGetterFunction<TResult, TObject, TValues>,
   options: BackboneGetterOptions<TObject, TValues>,
 ): TResult {
-  const { object, watchValues = [], watchEvents = [] } = options;
+  const {
+    object,
+    watchValues = [],
+    watchEvents = [],
+    watchRelatedEvents = [],
+  } = options;
 
   const [updateId, update] = useUpdate();
+
+  useBackboneListenTo(watchRelatedEvents, update);
 
   useBackboneEventListener(object, watchEvents, update);
 

@@ -106,4 +106,29 @@ describe('useBackboneGetter', () => {
       expect(result.current).toBe(11);
     });
   });
+
+  describe('when watching related events', () => {
+    it('executes the getter when event is triggered', () => {
+      const getter = jest.fn(getFullName);
+
+      const { result } = renderHook(() => {
+        return useBackboneGetter(getter, {
+          object: user,
+          watchRelatedEvents: [user, 'rename'],
+        });
+      });
+
+      expect(getter).toHaveBeenCalledTimes(1);
+
+      act(() => {
+        user.set('firstName', 'Frederico');
+        user.set('lastName', 'dos Anjos');
+        user.trigger('rename');
+      });
+
+      expect(getter).toHaveBeenCalledTimes(2);
+
+      expect(result.current).toBe('Frederico dos Anjos');
+    });
+  });
 });

@@ -1,6 +1,9 @@
 import type { Model, ModelSetOptions } from 'backbone';
 import { useCallback, useMemo } from 'react';
 import useBackboneEventListener from './useBackboneEventListener.js';
+import useBackboneListenTo, {
+  BackboneEventSubjects,
+} from './useBackboneListenTo.js';
 import useUpdate from './utils/useUpdate.js';
 
 /**
@@ -60,6 +63,7 @@ export type BackboneAttributeOptions<
   key: TKey;
   model: Model<TAttributes, TOptions>;
   watchEvents?: string[];
+  watchRelatedEvents?: BackboneEventSubjects;
 };
 
 /**
@@ -94,11 +98,13 @@ function useBackboneAttribute<
   value: NonNullable<TAttributes[TKey]> | null,
   setValue: BackboneAttributeUpdate<TAttributes, TKey, TOptions>,
 ] {
-  const { key, model, watchEvents = [] } = options;
+  const { key, model, watchEvents = [], watchRelatedEvents = [] } = options;
 
   const getValue = useCallback(() => model.get(key) ?? null, [key, model]);
 
   const [updateId, update] = useUpdate();
+
+  useBackboneListenTo(watchRelatedEvents, update);
 
   useBackboneEventListener(model, watchEvents, update);
 

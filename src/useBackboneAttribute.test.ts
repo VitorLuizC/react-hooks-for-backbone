@@ -69,4 +69,27 @@ describe('useBackboneAttribute', () => {
       expect(result.current[0]).toBe('911');
     });
   });
+
+  describe('when watching related revents', () => {
+    it("updates value when model's events are triggered", () => {
+      const { result } = renderHook(() => {
+        return useBackboneAttribute({
+          key: 'model',
+          model: car,
+          watchRelatedEvents: [car, 'rename'],
+        });
+      });
+
+      car.set('model', 'Enzo');
+
+      // Value only updates when using 'setValue' or triggering events
+      expect(result.current[0]).toBe('911');
+
+      act(() => {
+        car.trigger('rename');
+      });
+
+      expect(result.current[0]).toBe('Enzo');
+    });
+  });
 });

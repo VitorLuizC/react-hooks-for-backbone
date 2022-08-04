@@ -56,7 +56,7 @@ export type BackboneEventSubjects =
  * ```js
  * const subjects = [
  *   [user, 'sync', 'change:roles'],
- *   [user, 'sync', 'change:roles_configuration'],
+ *   [company, 'sync', 'change:roles_configuration'],
  *   [roles, 'sync'],
  * ];
  *
