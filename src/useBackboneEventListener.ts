@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import useHandler from './utils/useHandler.js';
 
 /**
- * React.js Hook that listens model's, or collection's, events and execute the
- * callback when they happen. It also pass model, or collection, as context to
- * the callback.
+ * React.js Hook that listens object's events and executes the callback when
+ * they happen. The object can be a Backbone Model, a Backbone Collection or
+ * any Backbone object that implement its events interface.
  *
  * @example
  *
