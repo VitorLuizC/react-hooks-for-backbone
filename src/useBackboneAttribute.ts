@@ -48,9 +48,7 @@ export type BackboneAttributeUpdate<
  * const options = {
  *   key: 'name',
  *   model: user,
- *   watch: {
- *     events: ['rename', 'change:name'],
- *   },
+ *   watchEvents: ['rename', 'change:name'],
  * } as BackboneAttributeOptions<UserAttributes, 'name'>;
  * ```
  */
@@ -61,9 +59,7 @@ export type BackboneAttributeOptions<
 > = {
   key: TKey;
   model: Model<TAttributes, TOptions>;
-  watch?: {
-    events?: string[];
-  };
+  watchEvents?: string[];
 };
 
 /**
@@ -77,9 +73,7 @@ export type BackboneAttributeOptions<
  * const [name, setName] = useBackboneAttribute({
  *   key: 'name',
  *   model: user,
- *   watch: {
- *     events: ['change:name', 'sync', 'rename'],
- *   },
+ *   watchEvents: ['change:name', 'sync', 'rename'],
  * });
  *
  *
@@ -100,13 +94,13 @@ function useBackboneAttribute<
   value: NonNullable<TAttributes[TKey]> | null,
   setValue: BackboneAttributeUpdate<TAttributes, TKey, TOptions>,
 ] {
-  const { key, model, watch: { events = [] } = {} } = options;
+  const { key, model, watchEvents = [] } = options;
 
   const getValue = useCallback(() => model.get(key) ?? null, [key, model]);
 
   const [updateId, update] = useUpdate();
 
-  useBackboneEventListener(model, events, update);
+  useBackboneEventListener(model, watchEvents, update);
 
   const value = useMemo(getValue, [getValue, updateId]);
 

@@ -44,9 +44,7 @@ describe('useBackboneGetter', () => {
       const { result } = renderHook(() => {
         return useBackboneGetter(getter, {
           object: user,
-          watch: {
-            events: ['rename'],
-          },
+          watchEvents: ['rename'],
         });
       });
 
@@ -79,9 +77,7 @@ describe('useBackboneGetter', () => {
       renderHook(() => {
         return useBackboneGetter(getter, {
           object,
-          watch: {
-            values: [1, 2],
-          },
+          watchValues: [1, 2],
         });
       });
 
@@ -92,12 +88,10 @@ describe('useBackboneGetter', () => {
       const getter = jest.fn(calc);
 
       const { rerender, result } = renderHook(
-        (values: [number, number]) => {
+        (watchValues: [number, number]) => {
           return useBackboneGetter(getter, {
             object,
-            watch: {
-              values,
-            },
+            watchValues,
           });
         },
         { initialProps: [3, 4] },

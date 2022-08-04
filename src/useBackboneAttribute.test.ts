@@ -53,9 +53,7 @@ describe('useBackboneAttribute', () => {
         return useBackboneAttribute({
           key: 'model',
           model: car,
-          watch: {
-            events: ['rename'],
-          },
+          watchEvents: ['rename'],
         });
       });
 

@@ -24,18 +24,16 @@ export type BackboneGetterFunction<
 > = (object: TObject, ...values: TValues) => TResult;
 
 /**
- * Object that contains the model, or the collection, and a list values and
- * events to watch in order to get some heavy calculated result.
+ * Object that contains a model, or a acollection, and a list values and
+ * events to watch in order to get the result.
  *
  * @example
  *
  * ```ts
  * const options: BackboneGetterOptions<Model<User>, [AppDetails]> = {
- *   model: user,
- *   watch: {
- *     values: [app],
- *     events: ['']
- *   }
+ *   object: user,
+ *   watchEvents: ['change:companyId'],
+ *   watchValues: [app],
  * }
  * ```
  */
@@ -44,21 +42,19 @@ export type BackboneGetterOptions<
   TValues extends unknown[] = [],
 > = {
   object: TObject;
-  watch?: {
-    values?: TValues;
-    events?: string[];
-  };
+  watchEvents?: string[];
+  watchValues?: TValues;
 };
 
 /**
  * React.js Hook that calculates a result derived from the received model, or
- * collection, and a list values. It's calculated on the first-render and
- * every time watched values change, or watched events are emitted.
+ * collection, and the watched list of values. It's calculated on the
+ * first-render and every time watched values changes, or events are triggered.
  *
  * @remarks
  *
- * ⚠️ it doesn't react to `getter` function's change, only to `object` and the
- * watched `values` and `events`' changes.
+ * ⚠️ it doesn't react to `getter` function's change. So it doesn't have to be
+ * defined using `useCallback` or `useMemo`.
  *
  * @example
  *
@@ -74,9 +70,7 @@ export type BackboneGetterOptions<
  *
  * const fullName = useBackboneGetter(getFullName, {
  *   object: user,
- *   watch: {
- *     events: ['sync', 'change'],
- *   },
+ *   watchEvents: ['sync', 'change'],
  * });
  * ```
  */
@@ -88,15 +82,15 @@ function useBackboneGetter<
   getter: BackboneGetterFunction<TResult, TObject, TValues>,
   options: BackboneGetterOptions<TObject, TValues>,
 ): TResult {
-  const { object, watch: { values = [], events = [] } = {} } = options;
+  const { object, watchValues = [], watchEvents = [] } = options;
 
   const [updateId, update] = useUpdate();
 
-  useBackboneEventListener(object, events, update);
+  useBackboneEventListener(object, watchEvents, update);
 
   return useMemo(() => {
-    return getter(object, ...(values as TValues));
-  }, [object, updateId, ...values]);
+    return getter(object, ...(watchValues as TValues));
+  }, [object, updateId, ...watchValues]);
 }
 
 export default useBackboneGetter;
