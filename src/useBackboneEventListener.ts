@@ -10,7 +10,7 @@ import useHandler from './utils/useHandler.js';
  * @example
  *
  * ```js
- * useListenTo(user, ['sync', 'change'], function (this: UserModel) {
+ * useBackboneEventListener(user, ['change'], function (this: UserModel) {
  *   updatePermissions(this.get('roles'));
  * });
  * ```
