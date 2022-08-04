@@ -8,6 +8,8 @@ React.js Hooks for Backbone.js
 
 - [BackboneAttributeOptions](README.md#backboneattributeoptions)
 - [BackboneAttributeUpdate](README.md#backboneattributeupdate)
+- [BackboneEventSubject](README.md#backboneeventsubject)
+- [BackboneEventSubjects](README.md#backboneeventsubjects)
 - [BackboneGetterFunction](README.md#backbonegetterfunction)
 - [BackboneGetterOptions](README.md#backbonegetteroptions)
 
@@ -16,6 +18,7 @@ React.js Hooks for Backbone.js
 - [useBackboneAttribute](README.md#usebackboneattribute)
 - [useBackboneEventListener](README.md#usebackboneeventlistener)
 - [useBackboneGetter](README.md#usebackbonegetter)
+- [useBackboneListenTo](README.md#usebackbonelistento)
 
 ## Type Aliases
 
@@ -32,9 +35,7 @@ watch in order to keep its value synchronized.
 const options = {
   key: 'name',
   model: user,
-  watch: {
-    events: ['rename', 'change:name'],
-  },
+  watchEvents: ['rename', 'change:name'],
 } as BackboneAttributeOptions<UserAttributes, 'name'>;
 ```
 
@@ -52,12 +53,12 @@ const options = {
 | :------ | :------ |
 | `key` | `TKey` |
 | `model` | `Model`<`TAttributes`, `TOptions`\> |
-| `watch?` | { `events?`: `string`[]  } |
-| `watch.events?` | `string`[] |
+| `watchEvents?` | `string`[] |
+| `watchRelatedEvents?` | [`BackboneEventSubjects`](README.md#backboneeventsubjects) |
 
 #### Defined in
 
-[useBackboneAttribute.ts:57](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/20f5552/src/useBackboneAttribute.ts#L57)
+[useBackboneAttribute.ts:58](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneAttribute.ts#L58)
 
 ___
 
@@ -113,7 +114,63 @@ setUserName((previousName) => previousName?.trim() ?? 'Uknown', {
 
 #### Defined in
 
-[useBackboneAttribute.ts:30](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/20f5552/src/useBackboneAttribute.ts#L30)
+[useBackboneAttribute.ts:33](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneAttribute.ts#L33)
+
+___
+
+### BackboneEventSubject
+
+Ƭ **BackboneEventSubject**: [object: Events, events: string[]]
+
+Tuple that contains a model, or a collection, and the event names to listen
+from it in [useBackboneListenTo](README.md#usebackbonelistento) hook.
+
+**`Example`**
+
+```ts
+const user = new Backbone.Model<UserAttributes>({ id });
+
+const subject: BackboneEventSubject = [
+  user,
+  'change:name',
+  'change:email',
+];
+```
+
+#### Defined in
+
+[useBackboneListenTo.ts:22](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneListenTo.ts#L22)
+
+___
+
+### BackboneEventSubjects
+
+Ƭ **BackboneEventSubjects**: [`BackboneEventSubject`](README.md#backboneeventsubject) \| [`BackboneEventSubject`](README.md#backboneeventsubject)[]
+
+Union between a single [BackboneEventSubject](README.md#backboneeventsubject) and a list of it.
+
+**`Example`**
+
+```ts
+const user = new Backbone.Model<UserAttributes>({ id });
+
+const subject: BackboneEventSubjects = [
+  user,
+  'change:name',
+  'change:email',
+];
+
+// or
+
+const subjects: BackboneEventSubjects = [
+  [user, 'change:name'],
+  [user, 'change:email', 'change:email_confirmation'],
+];
+```
+
+#### Defined in
+
+[useBackboneListenTo.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneListenTo.ts#L46)
 
 ___
 
@@ -159,7 +216,7 @@ getAvatar = (user, app) => {
 
 #### Defined in
 
-[useBackboneGetter.ts:20](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/20f5552/src/useBackboneGetter.ts#L20)
+[useBackboneGetter.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneGetter.ts#L23)
 
 ___
 
@@ -167,19 +224,18 @@ ___
 
 Ƭ **BackboneGetterOptions**<`TObject`, `TValues`\>: `Object`
 
-Object that contains the model, or the collection, and a list values and
-events to watch in order to get some heavy calculated result.
+Object that contains a model, or a acollection, and a list values and
+events to watch in order to get the result.
 
 **`Example`**
 
 ```ts
 const options: BackboneGetterOptions<Model<User>, [AppDetails]> = {
-  model: user,
-  watch: {
-    values: [app],
-    events: ['']
-  }
-}
+  object: user,
+  watchEvents: ['change:companyId'],
+  watchValues: [app],
+  watchRelatedEvents: [app, 'change:base_url'],
+};
 ```
 
 #### Type parameters
@@ -194,13 +250,13 @@ const options: BackboneGetterOptions<Model<User>, [AppDetails]> = {
 | Name | Type |
 | :------ | :------ |
 | `object` | `TObject` |
-| `watch?` | { `events?`: `string`[] ; `values?`: `TValues`  } |
-| `watch.events?` | `string`[] |
-| `watch.values?` | `TValues` |
+| `watchEvents?` | `string`[] |
+| `watchRelatedEvents?` | [`BackboneEventSubjects`](README.md#backboneeventsubjects) |
+| `watchValues?` | `TValues` |
 
 #### Defined in
 
-[useBackboneGetter.ts:42](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/20f5552/src/useBackboneGetter.ts#L42)
+[useBackboneGetter.ts:44](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneGetter.ts#L44)
 
 ## Functions
 
@@ -218,9 +274,7 @@ synchronized with the model.
 const [name, setName] = useBackboneAttribute({
   key: 'name',
   model: user,
-  watch: {
-    events: ['change:name', 'sync', 'rename'],
-  },
+  watchEvents: ['change:name', 'sync', 'rename'],
 });
 
 const handleChange = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -250,7 +304,7 @@ return <input value={name} onChange={handleChange} />;
 
 #### Defined in
 
-[useBackboneAttribute.ts:93](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/20f5552/src/useBackboneAttribute.ts#L93)
+[useBackboneAttribute.ts:91](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneAttribute.ts#L91)
 
 ___
 
@@ -258,14 +312,14 @@ ___
 
 ▸ **useBackboneEventListener**<`TObject`\>(`object`, `eventOrEvents`, `callback`): `void`
 
-React.js Hook that listens model's, or collection's, events and execute the
-callback when they happen. It also pass model, or collection, as context to
-the callback.
+React.js Hook that listens object's events and executes the callback when
+they happen. The object can be a Backbone Model, a Backbone Collection or
+any Backbone object that implement its events interface.
 
 **`Example`**
 
 ```js
-useListenTo(user, ['sync', 'change'], function (this: UserModel) {
+useBackboneEventListener(user, ['change'], function (this: UserModel) {
   updatePermissions(this.get('roles'));
 });
 ```
@@ -290,7 +344,7 @@ useListenTo(user, ['sync', 'change'], function (this: UserModel) {
 
 #### Defined in
 
-[useBackboneEventListener.ts:18](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/20f5552/src/useBackboneEventListener.ts#L18)
+[useBackboneEventListener.ts:18](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneEventListener.ts#L18)
 
 ___
 
@@ -299,13 +353,13 @@ ___
 ▸ **useBackboneGetter**<`TResult`, `TObject`, `TValues`\>(`getter`, `options`): `TResult`
 
 React.js Hook that calculates a result derived from the received model, or
-collection, and a list values. It's calculated on the first-render and
-every time watched values change, or watched events are emitted.
+collection, and the watched list of values. It's calculated on the
+first-render and every time watched values changes, or events are triggered.
 
 **`Remarks`**
 
-⚠️ it doesn't react to `getter` function's change, only to `object` and the
-watched `values` and `events`' changes.
+⚠️ it doesn't react to `getter` function's change. So it doesn't have to be
+defined using `useCallback` or `useMemo`.
 
 **`Example`**
 
@@ -321,9 +375,7 @@ function getFullName(user: User) {
 
 const fullName = useBackboneGetter(getFullName, {
   object: user,
-  watch: {
-    events: ['sync', 'change'],
-  },
+  watchEvents: ['sync', 'change'],
 });
 ```
 
@@ -348,4 +400,47 @@ const fullName = useBackboneGetter(getFullName, {
 
 #### Defined in
 
-[useBackboneGetter.ts:83](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/20f5552/src/useBackboneGetter.ts#L83)
+[useBackboneGetter.ts:82](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneGetter.ts#L82)
+
+___
+
+### useBackboneListenTo
+
+▸ **useBackboneListenTo**(`subjectOrSubjects`, `callback`): `void`
+
+React.js Hook that listens the received objects' events and execute callback
+when they happen.
+
+**`Example`**
+
+```js
+const subjects = [
+  [user, 'sync', 'change:roles'],
+  [company, 'sync', 'change:roles_configuration'],
+  [roles, 'sync'],
+];
+
+useBackboneListenTo(subjects, updateUserPermissions);
+
+// or
+
+useBackboneListenTo(
+  [user, 'change:permissions'],
+  updateUserPermissions,
+);
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `subjectOrSubjects` | [`BackboneEventSubjects`](README.md#backboneeventsubjects) |
+| `callback` | `AnyFunction` |
+
+#### Returns
+
+`void`
+
+#### Defined in
+
+[useBackboneListenTo.ts:73](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/8a56353/src/useBackboneListenTo.ts#L73)
