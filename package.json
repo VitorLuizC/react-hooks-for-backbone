@@ -73,5 +73,8 @@
   "bugs": {
     "url": "https://github.com/VitorLuizC/react-hooks-for-backbone/issues"
   },
-  "homepage": "https://github.com/VitorLuizC/react-hooks-for-backbone#readme"
+  "homepage": "https://github.com/VitorLuizC/react-hooks-for-backbone#readme",
+  "dependencies": {
+    "fast-deep-equal": "^3.1.3"
+  }
 }
