@@ -22,7 +22,8 @@
     "strict": true,
 
     // Type-checking settings.
-    "lib": ["ES2020"],
+    "lib": ["ES2022"],
+    "target": "ES2015",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "types": ["jest"]
