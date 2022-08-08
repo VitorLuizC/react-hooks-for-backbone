@@ -1,5 +1,7 @@
 // @ts-check
 
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import typescript2 from 'rollup-plugin-typescript2';
 
@@ -33,38 +35,9 @@ function createOutputOptions(options) {
   };
 }
 
-/**
- * @type {import('rollup').RollupOptions}
- */
-const options = {
+/** Rollup.js base options object. */
+const BASE_OPTIONS = {
   input: './src/index.ts',
-  output: [
-    createOutputOptions({
-      file: './dist/index.js',
-      format: 'commonjs',
-    }),
-    createOutputOptions({
-      file: './dist/index.cjs',
-      format: 'commonjs',
-    }),
-    createOutputOptions({
-      file: './dist/index.mjs',
-      format: 'esm',
-    }),
-    createOutputOptions({
-      file: './dist/index.esm.js',
-      format: 'esm',
-    }),
-    createOutputOptions({
-      file: './dist/index.umd.js',
-      format: 'umd',
-    }),
-    createOutputOptions({
-      file: './dist/index.umd.min.js',
-      format: 'umd',
-      plugins: [terser()],
-    }),
-  ],
   plugins: [
     typescript2({
       clean: true,
@@ -72,6 +45,55 @@ const options = {
       tsconfig: './tsconfig.bundle.json',
     }),
   ],
+  external: ['react'],
 };
+
+/**
+ * Rollup.js options object.
+ * @type {import('rollup').RollupOptions[]}
+ */
+const options = [
+  {
+    ...BASE_OPTIONS,
+    output: [
+      createOutputOptions({
+        file: './dist/index.js',
+        format: 'commonjs',
+      }),
+      createOutputOptions({
+        file: './dist/index.cjs',
+        format: 'commonjs',
+      }),
+      createOutputOptions({
+        file: './dist/index.mjs',
+        format: 'esm',
+      }),
+      createOutputOptions({
+        file: './dist/index.esm.js',
+        format: 'esm',
+      }),
+    ],
+    external: [...BASE_OPTIONS.external, 'fast-deep-equal'],
+  },
+  {
+    ...BASE_OPTIONS,
+    output: [
+      createOutputOptions({
+        file: './dist/index.umd.js',
+        format: 'umd',
+      }),
+      createOutputOptions({
+        file: './dist/index.umd.min.js',
+        format: 'umd',
+        plugins: [terser()],
+      }),
+    ],
+    plugins: [
+      ...(BASE_OPTIONS.plugins ?? []),
+      resolve({ browser: true }),
+      commonjs(),
+    ],
+  },
+];
 
 export default options;
