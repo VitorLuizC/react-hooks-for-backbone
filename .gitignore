@@ -34,5 +34,5 @@ pnpmfile.js
 /coverage
 
 # Generated bundles and type definitions.
-dist/
-types/
+/dist
+/types
