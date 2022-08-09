@@ -3,7 +3,7 @@ import { Model } from 'backbone';
 import useModelAttributes from './useModelAttributes';
 
 describe('useModelAttributes', () => {
-  xdescribe('when deletes a property', () => {
+  describe('when deletes a property', () => {
     type ModelAttributes = {
       color?: string;
     };
@@ -32,7 +32,7 @@ describe('useModelAttributes', () => {
       color: 'red',
     });
 
-    xit("gets model's attribute", () => {
+    it("gets model's attribute", () => {
       const { result } = renderHook(() => useModelAttributes(model));
 
       expect(result.current.color).toBe('red');
@@ -51,7 +51,7 @@ describe('useModelAttributes', () => {
     });
   });
 
-  xdescribe('when sets a property', () => {
+  describe('when sets a property', () => {
     type ModelAttributes = {
       color?: string;
     };
