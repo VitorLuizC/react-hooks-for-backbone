@@ -7,11 +7,11 @@ function useDidUpdateEffect(
 ): void {
   const isFirstRender = useRef(true);
 
-  const handleFirstRender = () => {
+  const firstRenderEffect = () => {
     isFirstRender.current = false;
   };
 
-  useEffect(isFirstRender.current ? handleFirstRender : effect, dependencies);
+  useEffect(isFirstRender.current ? firstRenderEffect : effect, dependencies);
 }
 
 export default useDidUpdateEffect;

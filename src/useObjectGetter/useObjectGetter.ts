@@ -1,12 +1,12 @@
 import type { Events } from 'backbone';
-import { useMemo } from 'react';
+import { useCallback, useState } from 'react';
 import { useObjectEventListener } from '../useObjectEventListener';
 import {
   ObjectEvents,
   ObjectsEvents,
   useObjectsEventsListeners,
 } from '../useObjectsEventsListeners';
-import useUpdate from '../utils/useUpdate';
+import useDidUpdateEffect from './useDidUpdateEffect';
 
 /**
  * Function that uses a model, or a collection, and a list of values as
@@ -96,15 +96,21 @@ function useObjectGetter<
     watchRelatedEvents = [],
   } = options;
 
-  const [updateId, update] = useUpdate();
-
-  useObjectEventListener(object, watchEvents, update);
-
-  useObjectsEventsListeners(watchRelatedEvents, update);
-
-  return useMemo(() => {
+  const getResult = useCallback(() => {
     return getter(object, ...(watchValues as TValues));
-  }, [object, updateId, ...watchValues]);
+  }, [object, ...watchValues]);
+
+  const [result, setResult] = useState(getResult);
+
+  const handleUpdate = () => setResult(getResult);
+
+  useDidUpdateEffect(handleUpdate, [getResult]);
+
+  useObjectEventListener(object, watchEvents, handleUpdate);
+
+  useObjectsEventsListeners(watchRelatedEvents, handleUpdate);
+
+  return result;
 }
 
 export default useObjectGetter;
