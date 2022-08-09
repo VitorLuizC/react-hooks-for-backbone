@@ -1,6 +1,7 @@
 import type { Events } from 'backbone';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useHandler } from '../useHandler';
+import serializeEvents from './serializeEvents';
 
 /**
  * React.js Hook that listens object's events and executes the callback when
@@ -20,9 +21,7 @@ function useObjectEventListener<TObject extends Events>(
   eventOrEvents: string | string[],
   callback: (this: TObject, ...args: unknown[]) => void,
 ) {
-  const events = Array.isArray(eventOrEvents)
-    ? eventOrEvents.join(' ')
-    : eventOrEvents;
+  const events = useMemo(() => serializeEvents(eventOrEvents), [eventOrEvents]);
 
   const handler = useHandler(callback);
 
