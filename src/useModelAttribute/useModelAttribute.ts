@@ -1,5 +1,6 @@
 import type { Model, ModelSetOptions } from 'backbone';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useState } from 'react';
+import getChangeEvent from '../utils/getChangeEvent';
 import { useObjectEventListener } from '../useObjectEventListener';
 import {
   ObjectEvents,
@@ -44,9 +45,7 @@ export type UseModelAttributeSet<
 > = (
   newValueOrFunction:
     | TAttributes[TAttributeName]
-    | ((
-        value: NonNullable<TAttributes[TAttributeName]> | null,
-      ) => TAttributes[TAttributeName]),
+    | ((value?: TAttributes[TAttributeName]) => TAttributes[TAttributeName]),
   options?: TOptions,
 ) => void;
 
@@ -107,7 +106,7 @@ function useModelAttribute<
 >(
   options: UseModelAttributeOptions<TAttributes, TAttributeName, TOptions>,
 ): [
-  value: NonNullable<TAttributes[TAttributeName]> | null,
+  value: TAttributes[TAttributeName] | undefined,
   setValue: UseModelAttributeSet<TAttributes, TAttributeName, TOptions>,
 ] {
   const {
@@ -117,15 +116,16 @@ function useModelAttribute<
     watchRelatedEvents = [],
   } = options;
 
-  const getValue = useCallback(() => model.get(name) ?? null, [name, model]);
+  const [value, updateLocalValue] = useState(() => model.get(name));
 
-  const [updateId, update] = useUpdate();
+  const handleChange = useCallback(
+    () => updateLocalValue(model.get(name)),
+    [name, model],
+  );
 
-  useObjectEventListener(model, watchEvents, update);
+  useObjectEventListener(model, watchEvents, handleChange);
 
-  useObjectsEventsListeners(watchRelatedEvents, update);
-
-  const value = useMemo(getValue, [getValue, updateId]);
+  useObjectsEventsListeners(watchRelatedEvents, handleChange);
 
   type SetValue = UseModelAttributeSet<TAttributes, TAttributeName, TOptions>;
 
@@ -135,13 +135,12 @@ function useModelAttribute<
         typeof newValueOrFunction !== 'function'
           ? newValueOrFunction
           : // @ts-expect-error because attribute's value could be a function.
-            newValueOrFunction(getValue());
+            newValueOrFunction(model.get(name));
 
-      model.set(name, newValue, options);
-
-      update();
+      // It isn't typed, but Model.prototype.set returns `false` when invalid.
+      if (model.set(name, newValue, options)) updateLocalValue(newValue);
     },
-    [name, model, getValue],
+    [name, model],
   );
 
   return [value, setValue];
