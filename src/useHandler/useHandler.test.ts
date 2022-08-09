@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useHandler from './useHandler.js';
+import useHandler from './useHandler';
 
 describe('useHandler', () => {
   it('runs the most recent callback', () => {

@@ -1,4 +1,4 @@
-import getEmptyObject from './createEmptyObject.js';
+import getEmptyObject from './createEmptyObject';
 
 describe('getEmptyObject', () => {
   it('creates an empty object', () => {

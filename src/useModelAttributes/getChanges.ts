@@ -1,5 +1,5 @@
 import equal from 'fast-deep-equal';
-import type KeyOf from '../types/KeyOf.js';
+import type KeyOf from '../types/KeyOf';
 
 /** Gets the changes between two objects. */
 function getChanges<TObject extends object>(

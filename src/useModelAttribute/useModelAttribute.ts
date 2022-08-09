@@ -1,20 +1,23 @@
 import type { Model, ModelSetOptions } from 'backbone';
 import { useCallback, useMemo } from 'react';
-import useBackboneEventListener from './useBackboneEventListener.js';
-import useBackboneListenTo, {
-  BackboneEventSubjects,
-} from './useBackboneListenTo.js';
-import useUpdate from './utils/useUpdate.js';
+import { useObjectEventListener } from '../useObjectEventListener';
+import {
+  ObjectEvents,
+  ObjectsEvents,
+  useObjectsEventsListeners,
+} from '../useObjectsEventsListeners';
+import useUpdate from '../utils/useUpdate';
 
 /**
- * Function that receives two arguments: The first can be both the new
- * attribute value, or a function that receives previous attribute value and
- * returns the new one; and the second one is the Models' set options.
+ * Function that receives two arguments:
+ * - The first can be both the new attribute value, or a function that receives
+ * previous attribute value and returns the new one;
+ * - The second one is the Models' set options, which is optional.
  *
  * @example
  *
  * ```ts
- * let setUserName: BackboneAttributeUpdate<
+ * declare const setUserName: UseModelAttributeSet<
  *   UserAttributes,
  *   'name',
  * >;
@@ -26,18 +29,20 @@ import useUpdate from './utils/useUpdate.js';
  * // or
  *
  * setUserName((previousName) => previousName?.trim() ?? 'Uknown', {
- *   validate: true,
+ *   silent: true,
  * });
  * ```
  */
-export type BackboneAttributeUpdate<
+export type UseModelAttributeSet<
   TAttributes,
-  TKey extends string & keyof TAttributes,
+  TAttributeName extends string & keyof TAttributes,
   TOptions = ModelSetOptions,
 > = (
   newValueOrFunction:
-    | TAttributes[TKey]
-    | ((value: NonNullable<TAttributes[TKey]> | null) => TAttributes[TKey]),
+    | TAttributes[TAttributeName]
+    | ((
+        value: NonNullable<TAttributes[TAttributeName]> | null,
+      ) => TAttributes[TAttributeName]),
   options?: TOptions,
 ) => void;
 
@@ -49,21 +54,21 @@ export type BackboneAttributeUpdate<
  *
  * ```ts
  * const options = {
- *   key: 'name',
+ *   name: 'name',
  *   model: user,
  *   watchEvents: ['rename', 'change:name'],
- * } as BackboneAttributeOptions<UserAttributes, 'name'>;
+ * } as UseModelAttributeOptions<UserAttributes, 'name'>;
  * ```
  */
-export type BackboneAttributeOptions<
+export type UseModelAttributeOptions<
   TAttributes,
-  TKey extends string & keyof TAttributes,
+  TAttributeName extends string & keyof TAttributes,
   TOptions = ModelSetOptions,
 > = {
-  key: TKey;
+  name: TAttributeName;
   model: Model<TAttributes, TOptions>;
   watchEvents?: string[];
-  watchRelatedEvents?: BackboneEventSubjects;
+  watchRelatedEvents?: ObjectEvents | ObjectsEvents;
 };
 
 /**
@@ -74,7 +79,7 @@ export type BackboneAttributeOptions<
  * @example
  *
  * ```ts
- * const [name, setName] = useBackboneAttribute({
+ * const [name, setName] = useModelAttribute({
  *   key: 'name',
  *   model: user,
  *   watchEvents: ['change:name', 'sync', 'rename'],
@@ -88,29 +93,29 @@ export type BackboneAttributeOptions<
  * return <input value={name} onChange={handleChange} />;
  * ```
  */
-function useBackboneAttribute<
+function useModelAttribute<
   TAttributes,
-  TKey extends string & keyof TAttributes,
+  TAttributeName extends string & keyof TAttributes,
   TOptions = ModelSetOptions,
 >(
-  options: BackboneAttributeOptions<TAttributes, TKey, TOptions>,
+  options: UseModelAttributeOptions<TAttributes, TAttributeName, TOptions>,
 ): [
-  value: NonNullable<TAttributes[TKey]> | null,
-  setValue: BackboneAttributeUpdate<TAttributes, TKey, TOptions>,
+  value: NonNullable<TAttributes[TAttributeName]> | null,
+  setValue: UseModelAttributeSet<TAttributes, TAttributeName, TOptions>,
 ] {
-  const { key, model, watchEvents = [], watchRelatedEvents = [] } = options;
+  const { name, model, watchEvents = [], watchRelatedEvents = [] } = options;
 
-  const getValue = useCallback(() => model.get(key) ?? null, [key, model]);
+  const getValue = useCallback(() => model.get(name) ?? null, [name, model]);
 
   const [updateId, update] = useUpdate();
 
-  useBackboneListenTo(watchRelatedEvents, update);
+  useObjectEventListener(model, watchEvents, update);
 
-  useBackboneEventListener(model, watchEvents, update);
+  useObjectsEventsListeners(watchRelatedEvents, update);
 
   const value = useMemo(getValue, [getValue, updateId]);
 
-  type SetValue = BackboneAttributeUpdate<TAttributes, TKey, TOptions>;
+  type SetValue = UseModelAttributeSet<TAttributes, TAttributeName, TOptions>;
 
   const setValue = useCallback<SetValue>(
     (newValueOrFunction, options) => {
@@ -120,14 +125,14 @@ function useBackboneAttribute<
           : // @ts-expect-error because attribute's value could be a function.
             newValueOrFunction(getValue());
 
-      model.set(key, newValue, options);
+      model.set(name, newValue, options);
 
       update();
     },
-    [key, model, getValue],
+    [name, model, getValue],
   );
 
   return [value, setValue];
 }
 
-export default useBackboneAttribute;
+export default useModelAttribute;

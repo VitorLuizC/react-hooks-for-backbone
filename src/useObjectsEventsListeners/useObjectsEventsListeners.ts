@@ -1,51 +1,42 @@
 import type { Events } from 'backbone';
-import type AnyFunction from './types/AnyFunction.js';
-import useHandler from './utils/useHandler.js';
-import useEffectWithDeepEqual from './utils/useEffectWithDeepEqual.js';
+import type AnyFunction from '../types/AnyFunction';
+import { useHandler } from '../useHandler';
+import useEffectWithDeepEqual from './useEffectWithDeepEqual';
 
 /**
  * Tuple that contains a model, or a collection, and the event names to listen
- * from it in {@link useBackboneListenTo} hook.
+ * from it in {@link useObjectsEventsListeners} hook.
  *
  * @example
  *
  * ```ts
  * const user = new Backbone.Model<UserAttributes>({ id });
  *
- * const subject: BackboneEventSubject = [
+ * const subject: ObjectEvents = [
  *   user,
  *   'change:name',
  *   'change:email',
+ *   'change:email_confirmation'
  * ];
  * ```
  */
-export type BackboneEventSubject = [object: Events, ...events: string[]];
+export type ObjectEvents = [object: Events, ...events: string[]];
 
 /**
- * Union between a single {@link BackboneEventSubject} and a list of it.
+ * List of {@link ObjectEvents}.
  *
  * @example
  *
  * ```ts
  * const user = new Backbone.Model<UserAttributes>({ id });
  *
- * const subject: BackboneEventSubjects = [
- *   user,
- *   'change:name',
- *   'change:email',
- * ];
- *
- * // or
- *
- * const subjects: BackboneEventSubjects = [
+ * const subjects: ObjectsEvents = [
  *   [user, 'change:name'],
  *   [user, 'change:email', 'change:email_confirmation'],
  * ];
  * ```
  */
-export type BackboneEventSubjects =
-  | BackboneEventSubject
-  | BackboneEventSubject[];
+export type ObjectsEvents = ObjectEvents[];
 
 /**
  * React.js Hook that listens the received objects' events and execute callback
@@ -60,41 +51,41 @@ export type BackboneEventSubjects =
  *   [roles, 'sync'],
  * ];
  *
- * useBackboneListenTo(subjects, updateUserPermissions);
+ * useObjectsEventsListeners(subjects, updateUserPermissions);
  *
  * // or
  *
- * useBackboneListenTo(
+ * useObjectsEventsListeners(
  *   [user, 'change:permissions'],
  *   updateUserPermissions,
  * );
  * ```
  */
-function useBackboneListenTo(
-  subjectOrSubjects: BackboneEventSubjects,
+function useObjectsEventsListeners(
+  objectOrObjectsEvents: ObjectEvents | ObjectsEvents,
   callback: AnyFunction,
-) {
+): void {
   const handler = useHandler(callback);
 
   useEffectWithDeepEqual(() => {
-    const subjects = Array.isArray(subjectOrSubjects[0])
-      ? (subjectOrSubjects as BackboneEventSubject[])
-      : [subjectOrSubjects as BackboneEventSubject];
+    const objectsEvents = Array.isArray(objectOrObjectsEvents[0])
+      ? (objectOrObjectsEvents as ObjectEvents[])
+      : [objectOrObjectsEvents as ObjectEvents];
 
-    subjects.forEach(([object, ...events]) => {
+    objectsEvents.forEach(([object, ...events]) => {
       if (!object || !events.length) return;
 
       object.on(events.join(' '), handler);
     });
 
     return () => {
-      subjects.forEach(([object, ...events]) => {
+      objectsEvents.forEach(([object, ...events]) => {
         if (!object || !events.length) return;
 
         object.off(events.join(' '), handler);
       });
     };
-  }, [handler, subjectOrSubjects]);
+  }, [handler, objectOrObjectsEvents]);
 }
 
-export default useBackboneListenTo;
+export default useObjectsEventsListeners;

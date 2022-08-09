@@ -1,13 +1,13 @@
 import { act, renderHook } from '@testing-library/react';
 import { Model } from 'backbone';
-import useBackboneEventListener from './useBackboneEventListener.js';
+import useObjectEventListener from './useObjectEventListener';
 
 type User = Model<{
   name: string;
   isActive: boolean;
 }>;
 
-describe('useBackboneEventListener', () => {
+describe('useObjectEventListener', () => {
   let user: User;
   let handler: jest.Mock;
 
@@ -21,7 +21,7 @@ describe('useBackboneEventListener', () => {
 
   it("listens object's event and execute the callback", () => {
     renderHook(() => {
-      useBackboneEventListener(user, 'change:name', handler);
+      useObjectEventListener(user, 'change:name', handler);
     });
 
     expect(handler).not.toHaveBeenCalled();
@@ -43,7 +43,7 @@ describe('useBackboneEventListener', () => {
     );
 
     renderHook(() => {
-      useBackboneEventListener(user, 'rename', handleNameChange);
+      useObjectEventListener(user, 'rename', handleNameChange);
     });
 
     act(() => {
@@ -54,7 +54,7 @@ describe('useBackboneEventListener', () => {
   describe('when component unmounts', () => {
     it("stops listening the model's event", () => {
       const { unmount } = renderHook(() => {
-        useBackboneEventListener(user, 'change:name', handler);
+        useObjectEventListener(user, 'change:name', handler);
       });
 
       expect(handler).not.toHaveBeenCalled();

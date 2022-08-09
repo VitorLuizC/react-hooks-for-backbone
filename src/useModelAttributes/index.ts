@@ -1,1 +1,1 @@
-export { default } from './useModelAttributes.js';
+export { default as useModelAttributes } from './useModelAttributes';

@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { Model } from 'backbone';
-import useBackboneAttribute from './useBackboneAttribute';
+import useModelAttribute from './useModelAttribute';
 
 type CarModelAttributes = {
   brand: string;
@@ -9,7 +9,7 @@ type CarModelAttributes = {
 
 type CarModel = Model<CarModelAttributes>;
 
-describe('useBackboneAttribute', () => {
+describe('useModelAttribute', () => {
   const car: CarModel = new Model({
     brand: 'Ferrari',
     model: 'Enzo',
@@ -17,8 +17,8 @@ describe('useBackboneAttribute', () => {
 
   it("returns model's attribute value", () => {
     const { result } = renderHook(() => {
-      return useBackboneAttribute({
-        key: 'brand',
+      return useModelAttribute({
+        name: 'brand',
         model: car,
       });
     });
@@ -28,8 +28,8 @@ describe('useBackboneAttribute', () => {
 
   it("returns a function to update model's attribute", () => {
     const { result } = renderHook(() => {
-      return useBackboneAttribute({
-        key: 'brand',
+      return useModelAttribute({
+        name: 'brand',
         model: car,
       });
     });
@@ -50,8 +50,8 @@ describe('useBackboneAttribute', () => {
   describe('when watching events', () => {
     it("updates value when model's events are triggered", () => {
       const { result } = renderHook(() => {
-        return useBackboneAttribute({
-          key: 'model',
+        return useModelAttribute({
+          name: 'model',
           model: car,
           watchEvents: ['rename'],
         });
@@ -73,8 +73,8 @@ describe('useBackboneAttribute', () => {
   describe('when watching related revents', () => {
     it("updates value when model's events are triggered", () => {
       const { result } = renderHook(() => {
-        return useBackboneAttribute({
-          key: 'model',
+        return useModelAttribute({
+          name: 'model',
           model: car,
           watchRelatedEvents: [car, 'rename'],
         });

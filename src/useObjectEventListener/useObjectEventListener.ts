@@ -1,6 +1,6 @@
 import type { Events } from 'backbone';
 import { useEffect } from 'react';
-import useHandler from './utils/useHandler.js';
+import { useHandler } from '../useHandler';
 
 /**
  * React.js Hook that listens object's events and executes the callback when
@@ -10,12 +10,12 @@ import useHandler from './utils/useHandler.js';
  * @example
  *
  * ```js
- * useBackboneEventListener(user, ['change'], function (this: UserModel) {
+ * useObjectEventListener(user, ['change'], function (this: UserModel) {
  *   updatePermissions(this.get('roles'));
  * });
  * ```
  */
-function useBackboneEventListener<TObject extends Events>(
+function useObjectEventListener<TObject extends Events>(
   object: TObject,
   eventOrEvents: string | string[],
   callback: (this: TObject, ...args: unknown[]) => void,
@@ -37,4 +37,4 @@ function useBackboneEventListener<TObject extends Events>(
   }, [object, events, handler]);
 }
 
-export default useBackboneEventListener;
+export default useObjectEventListener;

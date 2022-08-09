@@ -1,10 +1,12 @@
 import type { Events } from 'backbone';
 import { useMemo } from 'react';
-import useBackboneEventListener from './useBackboneEventListener.js';
-import useBackboneListenTo, {
-  BackboneEventSubjects,
-} from './useBackboneListenTo.js';
-import useUpdate from './utils/useUpdate.js';
+import { useObjectEventListener } from '../useObjectEventListener';
+import {
+  ObjectEvents,
+  ObjectsEvents,
+  useObjectsEventsListeners,
+} from '../useObjectsEventsListeners';
+import useUpdate from '../utils/useUpdate';
 
 /**
  * Function that uses a model, or a collection, and a list of values as
@@ -13,14 +15,14 @@ import useUpdate from './utils/useUpdate.js';
  * @example
  *
  * ```ts
- * let getAvatar: BackboneGetterFunction<Model<User>, [AppDetails]>;
+ * let getAvatar: UseObjectGetterFunction<Model<User>, [AppDetails]>;
  *
  * getAvatar = (user, app) => {
  *   return `${app.baseUrl}/avatar/${user.get('companyId')}/${user.get('id')}`;
  * };
  * ```
  */
-export type BackboneGetterFunction<
+export type UseObjectGetterFunction<
   TResult,
   TObject extends Events,
   TValues extends unknown[] = [],
@@ -33,7 +35,7 @@ export type BackboneGetterFunction<
  * @example
  *
  * ```ts
- * const options: BackboneGetterOptions<Model<User>, [AppDetails]> = {
+ * const options: UseObjectGetterOptions<Model<User>, [AppDetails]> = {
  *   object: user,
  *   watchEvents: ['change:companyId'],
  *   watchValues: [app],
@@ -41,14 +43,14 @@ export type BackboneGetterFunction<
  * };
  * ```
  */
-export type BackboneGetterOptions<
+export type UseObjectGetterOptions<
   TObject extends Events,
   TValues extends unknown[] = [],
 > = {
   object: TObject;
   watchEvents?: string[];
   watchValues?: TValues;
-  watchRelatedEvents?: BackboneEventSubjects;
+  watchRelatedEvents?: ObjectEvents | ObjectsEvents;
 };
 
 /**
@@ -73,19 +75,19 @@ export type BackboneGetterOptions<
  *   return user.get('first_name') + ' ' + user.get('last_name');
  * }
  *
- * const fullName = useBackboneGetter(getFullName, {
+ * const fullName = useObjectGetter(getFullName, {
  *   object: user,
  *   watchEvents: ['sync', 'change'],
  * });
  * ```
  */
-function useBackboneGetter<
+function useObjectGetter<
   TResult,
   TObject extends Events,
   TValues extends unknown[] = [],
 >(
-  getter: BackboneGetterFunction<TResult, TObject, TValues>,
-  options: BackboneGetterOptions<TObject, TValues>,
+  getter: UseObjectGetterFunction<TResult, TObject, TValues>,
+  options: UseObjectGetterOptions<TObject, TValues>,
 ): TResult {
   const {
     object,
@@ -96,13 +98,13 @@ function useBackboneGetter<
 
   const [updateId, update] = useUpdate();
 
-  useBackboneListenTo(watchRelatedEvents, update);
+  useObjectEventListener(object, watchEvents, update);
 
-  useBackboneEventListener(object, watchEvents, update);
+  useObjectsEventsListeners(watchRelatedEvents, update);
 
   return useMemo(() => {
     return getter(object, ...(watchValues as TValues));
   }, [object, updateId, ...watchValues]);
 }
 
-export default useBackboneGetter;
+export default useObjectGetter;

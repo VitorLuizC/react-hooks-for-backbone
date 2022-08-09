@@ -1,5 +1,5 @@
 import { act, renderHook } from '@testing-library/react';
-import useUpdate from './useUpdate.js';
+import useUpdate from './useUpdate';
 
 describe('useUpdate', () => {
   it('provides an unique symbol as update id', () => {

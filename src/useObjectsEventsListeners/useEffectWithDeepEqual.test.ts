@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import useEffectWithDeepEqual from './useEffectWithDeepEqual.js';
+import useEffectWithDeepEqual from './useEffectWithDeepEqual';
 
 describe('useEffectWithDeepEqual', () => {
   it('only executes effect if dependencies array change', () => {

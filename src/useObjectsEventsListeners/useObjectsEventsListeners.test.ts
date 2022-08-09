@@ -1,6 +1,6 @@
 import { Model } from 'backbone';
 import { act, renderHook } from '@testing-library/react';
-import useBackboneListenTo from './useBackboneListenTo';
+import useObjectsEventsListeners from './useObjectsEventsListeners';
 
 type User = Model<{
   name: string;
@@ -22,7 +22,7 @@ describe('useBackboneListenTo', () => {
 
   it("listens objects' events and execute the callback", () => {
     renderHook(() => {
-      useBackboneListenTo(
+      useObjectsEventsListeners(
         [
           [user, 'change:name'],
           [user, 'rename', 'update'],
@@ -57,7 +57,7 @@ describe('useBackboneListenTo', () => {
   describe('when unmounts', () => {
     it('stops listening events', () => {
       const { unmount } = renderHook(() => {
-        useBackboneListenTo([user, 'change:name'], handler);
+        useObjectsEventsListeners([user, 'change:name'], handler);
       });
 
       expect(handler).not.toHaveBeenCalled();

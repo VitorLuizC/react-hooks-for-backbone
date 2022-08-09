@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react';
 import { Model } from 'backbone';
-import useBackboneGetter from './useBackboneGetter.js';
+import useObjectGetter from './useObjectGetter';
 
 type User = Model<{
   firstName: string;
@@ -26,7 +26,7 @@ describe('useBackboneGetter', () => {
       const getter = jest.fn(getFullName);
 
       const { result } = renderHook(() => {
-        return useBackboneGetter(getter, {
+        return useObjectGetter(getter, {
           object: user,
         });
       });
@@ -42,7 +42,7 @@ describe('useBackboneGetter', () => {
       const getter = jest.fn(getFullName);
 
       const { result } = renderHook(() => {
-        return useBackboneGetter(getter, {
+        return useObjectGetter(getter, {
           object: user,
           watchEvents: ['rename'],
         });
@@ -75,7 +75,7 @@ describe('useBackboneGetter', () => {
       const getter = jest.fn(calc);
 
       renderHook(() => {
-        return useBackboneGetter(getter, {
+        return useObjectGetter(getter, {
           object,
           watchValues: [1, 2],
         });
@@ -89,7 +89,7 @@ describe('useBackboneGetter', () => {
 
       const { rerender, result } = renderHook(
         (watchValues: [number, number]) => {
-          return useBackboneGetter(getter, {
+          return useObjectGetter(getter, {
             object,
             watchValues,
           });
@@ -112,7 +112,7 @@ describe('useBackboneGetter', () => {
       const getter = jest.fn(getFullName);
 
       const { result } = renderHook(() => {
-        return useBackboneGetter(getter, {
+        return useObjectGetter(getter, {
           object: user,
           watchRelatedEvents: [user, 'rename'],
         });
