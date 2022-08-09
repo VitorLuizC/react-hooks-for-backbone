@@ -7,6 +7,7 @@ React.js Hooks for Backbone.js
 ### Type Aliases
 
 - [AnyFunction](README.md#anyfunction)
+- [KeyOf](README.md#keyof)
 - [ObjectEvents](README.md#objectevents)
 - [ObjectsEvents](README.md#objectsevents)
 - [UseModelAttributeOptions](README.md#usemodelattributeoptions)
@@ -50,7 +51,25 @@ as a constructor in TypeScript's type system.
 
 #### Defined in
 
-[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/types/AnyFunction.ts#L8)
+[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/types/AnyFunction.ts#L8)
+
+___
+
+### KeyOf
+
+Ƭ **KeyOf**<`TObject`\>: `string` & keyof `TObject`
+
+Union between string keys of received object.
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TObject` | extends `object` |
+
+#### Defined in
+
+[types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/types/KeyOf.ts#L2)
 
 ___
 
@@ -76,7 +95,7 @@ const subject: ObjectEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
 
 ___
 
@@ -99,7 +118,7 @@ const subjects: ObjectsEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:39](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L39)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:39](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L39)
 
 ___
 
@@ -125,7 +144,7 @@ const options = {
 | Name | Type |
 | :------ | :------ |
 | `TAttributes` | extends `object` |
-| `TAttributeName` | extends `KeyOf`<`TAttributes`\> |
+| `TAttributeName` | extends [`KeyOf`](README.md#keyof)<`TAttributes`\> |
 | `TOptions` | `ModelSetOptions` |
 
 #### Type declaration
@@ -139,7 +158,7 @@ const options = {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useModelAttribute/useModelAttribute.ts#L62)
+[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useModelAttribute/useModelAttribute.ts#L62)
 
 ___
 
@@ -152,7 +171,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `TAttributes` | extends `object` |
-| `TAttributeName` | extends `KeyOf`<`TAttributes`\> |
+| `TAttributeName` | extends [`KeyOf`](README.md#keyof)<`TAttributes`\> |
 | `TOptions` | `ModelSetOptions` |
 
 #### Type declaration
@@ -196,7 +215,7 @@ setUserName((previousName) => previousName?.trim() ?? 'Uknown', {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useModelAttribute/useModelAttribute.ts#L37)
+[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useModelAttribute/useModelAttribute.ts#L37)
 
 ___
 
@@ -242,7 +261,7 @@ getAvatar = (user, app) => {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useObjectGetter/useObjectGetter.ts#L25)
+[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useObjectGetter/useObjectGetter.ts#L25)
 
 ___
 
@@ -282,7 +301,7 @@ const options: UseObjectGetterOptions<Model<User>, [AppDetails]> = {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useObjectGetter/useObjectGetter.ts#L46)
+[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useObjectGetter/useObjectGetter.ts#L46)
 
 ## Functions
 
@@ -333,7 +352,7 @@ return <input value={name} onChange={handleChange} />;
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useModelAttribute/useModelAttribute.ts#L98)
+[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useModelAttribute/useModelAttribute.ts#L98)
 
 ___
 
@@ -382,7 +401,7 @@ return (
 
 #### Defined in
 
-[useModelAttributes/useModelAttributes.ts:30](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useModelAttributes/useModelAttributes.ts#L30)
+[useModelAttributes/useModelAttributes.ts:30](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useModelAttributes/useModelAttributes.ts#L30)
 
 ___
 
@@ -422,7 +441,7 @@ useObjectEventListener(user, ['change'], function (this: UserModel) {
 
 #### Defined in
 
-[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useObjectEventListener/useObjectEventListener.ts#L19)
+[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useObjectEventListener/useObjectEventListener.ts#L19)
 
 ___
 
@@ -478,7 +497,7 @@ const fullName = useObjectGetter(getFullName, {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useObjectGetter/useObjectGetter.ts#L84)
+[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useObjectGetter/useObjectGetter.ts#L84)
 
 ___
 
@@ -521,4 +540,4 @@ useObjectsEventsListeners(
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:64](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f34b939/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L64)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:64](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/12a5e24/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L64)
