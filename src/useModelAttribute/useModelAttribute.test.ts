@@ -76,6 +76,7 @@ describe('useModelAttribute', () => {
         return useModelAttribute({
           name: 'model',
           model: car,
+          watchEvents: [],
           watchRelatedEvents: [car, 'rename'],
         });
       });

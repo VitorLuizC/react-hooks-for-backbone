@@ -2,7 +2,7 @@ import type { Model, ModelSetOptions } from 'backbone';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type KeyOf from '../types/KeyOf';
 import getEmptyObject from './createEmptyObject';
-import getChangeEvent from './getChangeEvent';
+import getChangeEvent from '../utils/getChangeEvent';
 import getChanges from './getChanges';
 
 /**

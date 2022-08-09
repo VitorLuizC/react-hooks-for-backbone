@@ -6,7 +6,11 @@ import {
   ObjectsEvents,
   useObjectsEventsListeners,
 } from '../useObjectsEventsListeners';
-import useUpdate from '../utils/useUpdate';
+
+/** Gets the default events' names for model's attributes. */
+function getDefaultEvents(model: Model, attributeName: string): string[] {
+  return ['sync', 'change', getChangeEvent(model, attributeName)];
+}
 
 /**
  * Function that receives two arguments:
@@ -76,6 +80,9 @@ export type UseModelAttributeOptions<
  * function to update it. It also watches received events to keep its value
  * synchronized with the model.
  *
+ * By default it watches `'sync'`, `'change'`,  and `'change:${name}'` events,
+ * but you can change it with `watchEvents` option.
+ *
  * @example
  *
  * ```ts
@@ -103,7 +110,12 @@ function useModelAttribute<
   value: NonNullable<TAttributes[TAttributeName]> | null,
   setValue: UseModelAttributeSet<TAttributes, TAttributeName, TOptions>,
 ] {
-  const { name, model, watchEvents = [], watchRelatedEvents = [] } = options;
+  const {
+    name,
+    model,
+    watchEvents = getDefaultEvents(model, name),
+    watchRelatedEvents = [],
+  } = options;
 
   const getValue = useCallback(() => model.get(name) ?? null, [name, model]);
 
