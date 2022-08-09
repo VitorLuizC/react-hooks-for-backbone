@@ -7,6 +7,7 @@ import {
   ObjectsEvents,
   useObjectsEventsListeners,
 } from '../useObjectsEventsListeners';
+import type KeyOf from '../types/KeyOf';
 
 /** Gets the default events' names for model's attributes. */
 function getDefaultEvents(model: Model, attributeName: string): string[] {
@@ -39,8 +40,8 @@ function getDefaultEvents(model: Model, attributeName: string): string[] {
  * ```
  */
 export type UseModelAttributeSet<
-  TAttributes,
-  TAttributeName extends string & keyof TAttributes,
+  TAttributes extends object,
+  TAttributeName extends KeyOf<TAttributes>,
   TOptions = ModelSetOptions,
 > = (
   newValueOrFunction:
@@ -64,8 +65,8 @@ export type UseModelAttributeSet<
  * ```
  */
 export type UseModelAttributeOptions<
-  TAttributes,
-  TAttributeName extends string & keyof TAttributes,
+  TAttributes extends object,
+  TAttributeName extends KeyOf<TAttributes>,
   TOptions = ModelSetOptions,
 > = {
   name: TAttributeName;
@@ -100,8 +101,8 @@ export type UseModelAttributeOptions<
  * ```
  */
 function useModelAttribute<
-  TAttributes,
-  TAttributeName extends string & keyof TAttributes,
+  TAttributes extends object,
+  TAttributeName extends KeyOf<TAttributes>,
   TOptions = ModelSetOptions,
 >(
   options: UseModelAttributeOptions<TAttributes, TAttributeName, TOptions>,
