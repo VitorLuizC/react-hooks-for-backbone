@@ -1,18 +1,13 @@
 import type { Model, ModelSetOptions } from 'backbone';
-import { useCallback, useState } from 'react';
-import getChangeEvent from '../utils/getChangeEvent';
+import { useCallback, useMemo, useState } from 'react';
+import type KeyOf from '../types/KeyOf';
 import { useObjectEventListener } from '../useObjectEventListener';
 import {
   ObjectEvents,
   ObjectsEvents,
   useObjectsEventsListeners,
 } from '../useObjectsEventsListeners';
-import type KeyOf from '../types/KeyOf';
-
-/** Gets the default events' names for model's attributes. */
-function getDefaultEvents(model: Model, attributeName: string): string[] {
-  return ['sync', 'change', getChangeEvent(model, attributeName)];
-}
+import getDefaultWatchEvents from './getDefaultWatchEvents';
 
 /**
  * Function that receives two arguments:
@@ -110,12 +105,7 @@ function useModelAttribute<
   value: TAttributes[TAttributeName] | undefined,
   setValue: UseModelAttributeSet<TAttributes, TAttributeName, TOptions>,
 ] {
-  const {
-    name,
-    model,
-    watchEvents = getDefaultEvents(model, name),
-    watchRelatedEvents = [],
-  } = options;
+  const { name, model, watchEvents, watchRelatedEvents = [] } = options;
 
   const [value, updateLocalValue] = useState(() => model.get(name));
 
@@ -124,7 +114,16 @@ function useModelAttribute<
     [name, model],
   );
 
-  useObjectEventListener(model, watchEvents, handleChange);
+  const defaultWatchEvents = useMemo(
+    () => getDefaultWatchEvents(model, name),
+    [model, name],
+  );
+
+  useObjectEventListener(
+    model,
+    watchEvents ?? defaultWatchEvents,
+    handleChange,
+  );
 
   useObjectsEventsListeners(watchRelatedEvents, handleChange);
 
