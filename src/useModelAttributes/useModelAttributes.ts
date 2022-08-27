@@ -4,6 +4,7 @@ import type KeyOf from '../types/KeyOf';
 import getEmptyObject from './createEmptyObject';
 import getChangeEvent from '../utils/getChangeEvent';
 import getChanges from './getChanges';
+import isEmptyObject from './isEmptyObject';
 
 /**
  * React.js Hook that provides the Backbone.js Model's attributes as an object.
@@ -40,7 +41,7 @@ function useModelAttributes<
         model.attributes,
       );
 
-      if (!Object.keys(changedAttributes)) return previousAttributes;
+      if (isEmptyObject(changedAttributes)) return previousAttributes;
 
       return Object.assign(
         getEmptyObject(),
