@@ -1,4 +1,4 @@
-import type { Model, ModelSetOptions } from 'backbone';
+import type { Model, ModelSetOptions, Silenceable } from 'backbone';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type KeyOf from '../types/KeyOf';
 import getEmptyObject from './createEmptyObject';
@@ -29,7 +29,7 @@ import getChanges from './getChanges';
  */
 function useModelAttributes<
   TAttributes extends object,
-  TOptions = ModelSetOptions,
+  TOptions extends Silenceable = ModelSetOptions,
 >(model: Model<TAttributes, TOptions>, options?: TOptions): TAttributes {
   const [attributes, setAttributes] = useState<TAttributes>(getEmptyObject);
 

@@ -1,8 +1,11 @@
-import type { Model } from 'backbone';
 import getChangeEvent from '../utils/getChangeEvent';
+import type AnyModel from '../types/AnyModel';
 
 /** Gets the default events' names for model's attributes. */
-function getDefaultWatchEvents(model: Model, attributeName: string): string[] {
+function getDefaultWatchEvents(
+  model: AnyModel,
+  attributeName: string,
+): string[] {
   return ['sync', 'change', getChangeEvent(model, attributeName)];
 }
 
