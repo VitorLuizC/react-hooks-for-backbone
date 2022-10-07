@@ -82,7 +82,7 @@ export type UseModelAttributeOptions<
  *
  * ```ts
  * const [name, setName] = useModelAttribute({
- *   key: 'name',
+ *   name: 'name',
  *   model: user,
  *   watchEvents: ['change:name', 'sync', 'rename'],
  * });

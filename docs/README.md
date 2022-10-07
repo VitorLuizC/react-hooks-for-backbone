@@ -51,7 +51,7 @@ as a constructor in TypeScript's type system.
 
 #### Defined in
 
-[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/types/AnyFunction.ts#L8)
+[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/types/AnyFunction.ts#L8)
 
 ___
 
@@ -69,7 +69,7 @@ Union between string keys of received object.
 
 #### Defined in
 
-[types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/types/KeyOf.ts#L2)
+[types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/types/KeyOf.ts#L2)
 
 ___
 
@@ -95,7 +95,7 @@ const subject: ObjectEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
 
 ___
 
@@ -118,7 +118,7 @@ const subjects: ObjectsEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:42](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L42)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:42](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L42)
 
 ___
 
@@ -158,7 +158,7 @@ const options = {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useModelAttribute/useModelAttribute.ts#L62)
+[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useModelAttribute/useModelAttribute.ts#L62)
 
 ___
 
@@ -215,7 +215,7 @@ setUserName((previousName) => previousName?.trim() ?? 'Uknown', {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useModelAttribute/useModelAttribute.ts#L37)
+[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useModelAttribute/useModelAttribute.ts#L37)
 
 ___
 
@@ -261,7 +261,7 @@ getAvatar = (user, app) => {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useObjectGetter/useObjectGetter.ts#L25)
+[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useObjectGetter/useObjectGetter.ts#L25)
 
 ___
 
@@ -301,7 +301,7 @@ const options: UseObjectGetterOptions<Model<User>, [AppDetails]> = {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useObjectGetter/useObjectGetter.ts#L46)
+[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useObjectGetter/useObjectGetter.ts#L46)
 
 ## Functions
 
@@ -320,7 +320,7 @@ but you can change it with `watchEvents` option.
 
 ```ts
 const [name, setName] = useModelAttribute({
-  key: 'name',
+  name: 'name',
   model: user,
   watchEvents: ['change:name', 'sync', 'rename'],
 });
@@ -352,7 +352,7 @@ return <input value={name} onChange={handleChange} />;
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useModelAttribute/useModelAttribute.ts#L98)
+[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useModelAttribute/useModelAttribute.ts#L98)
 
 ___
 
@@ -401,7 +401,7 @@ return (
 
 #### Defined in
 
-[useModelAttributes/useModelAttributes.ts:31](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useModelAttributes/useModelAttributes.ts#L31)
+[useModelAttributes/useModelAttributes.ts:31](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useModelAttributes/useModelAttributes.ts#L31)
 
 ___
 
@@ -441,7 +441,7 @@ useObjectEventListener(user, ['change'], function (this: UserModel) {
 
 #### Defined in
 
-[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useObjectEventListener/useObjectEventListener.ts#L19)
+[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useObjectEventListener/useObjectEventListener.ts#L19)
 
 ___
 
@@ -497,7 +497,7 @@ const fullName = useObjectGetter(getFullName, {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useObjectGetter/useObjectGetter.ts#L84)
+[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useObjectGetter/useObjectGetter.ts#L84)
 
 ___
 
@@ -540,4 +540,4 @@ useObjectsEventsListeners(
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/f79fd57/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L67)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/e33986b/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L67)
