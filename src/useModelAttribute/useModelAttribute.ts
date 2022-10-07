@@ -65,7 +65,7 @@ export type UseModelAttributeOptions<
   TOptions = ModelSetOptions,
 > = {
   name: TAttributeName;
-  model: Model<TAttributes, TOptions>;
+  model: Model<TAttributes, TOptions> | undefined | null;
   watchEvents?: string[];
   watchRelatedEvents?: ObjectEvents | ObjectsEvents;
 };
@@ -107,15 +107,15 @@ function useModelAttribute<
 ] {
   const { name, model, watchEvents, watchRelatedEvents = [] } = options;
 
-  const [value, updateLocalValue] = useState(() => model.get(name));
+  const [value, updateLocalValue] = useState(() => model?.get(name));
 
   const handleChange = useCallback(
-    () => updateLocalValue(model.get(name)),
+    () => updateLocalValue(model?.get(name)),
     [name, model],
   );
 
   const defaultWatchEvents = useMemo(
-    () => getDefaultWatchEvents(model, name),
+    () => (model ? getDefaultWatchEvents(model, name) : []),
     [model, name],
   );
 
@@ -135,10 +135,10 @@ function useModelAttribute<
         typeof newValueOrFunction !== 'function'
           ? newValueOrFunction
           : // @ts-expect-error because attribute's value could be a function.
-            newValueOrFunction(model.get(name));
+            newValueOrFunction(model?.get(name));
 
       // It isn't typed, but Model.prototype.set returns `false` when invalid.
-      if (model.set(name, newValue, options)) updateLocalValue(newValue);
+      if (model?.set(name, newValue, options)) updateLocalValue(newValue);
     },
     [name, model],
   );

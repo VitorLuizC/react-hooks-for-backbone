@@ -17,7 +17,7 @@ import serializeEvents from './serializeEvents';
  * ```
  */
 function useObjectEventListener<TObject extends Events>(
-  object: TObject,
+  object: TObject | undefined | null,
   eventOrEvents: string | string[],
   callback: (this: TObject, ...args: unknown[]) => void,
 ) {
@@ -26,7 +26,7 @@ function useObjectEventListener<TObject extends Events>(
   const handler = useHandler(callback);
 
   useEffect(() => {
-    if (!events) return;
+    if (!events || !object) return;
 
     object.on(events, handler);
 

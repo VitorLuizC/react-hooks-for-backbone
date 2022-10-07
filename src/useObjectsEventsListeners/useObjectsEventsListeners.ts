@@ -20,7 +20,10 @@ import useEffectWithDeepEqual from './useEffectWithDeepEqual';
  * ];
  * ```
  */
-export type ObjectEvents = [object: Events, ...events: string[]];
+export type ObjectEvents = [
+  object: Events | undefined | null,
+  ...events: string[],
+];
 
 /**
  * List of {@link ObjectEvents}.

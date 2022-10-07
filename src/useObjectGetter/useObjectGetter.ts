@@ -24,7 +24,7 @@ import useDidUpdateEffect from './useDidUpdateEffect';
  */
 export type UseObjectGetterFunction<
   TResult,
-  TObject extends Events,
+  TObject extends Events | undefined | null,
   TValues extends unknown[] = [],
 > = (object: TObject, ...values: TValues) => TResult;
 
@@ -44,7 +44,7 @@ export type UseObjectGetterFunction<
  * ```
  */
 export type UseObjectGetterOptions<
-  TObject extends Events,
+  TObject extends Events | undefined | null,
   TValues extends unknown[] = [],
 > = {
   object: TObject;
@@ -83,7 +83,7 @@ export type UseObjectGetterOptions<
  */
 function useObjectGetter<
   TResult,
-  TObject extends Events,
+  TObject extends Events | undefined | null,
   TValues extends unknown[] = [],
 >(
   getter: UseObjectGetterFunction<TResult, TObject, TValues>,

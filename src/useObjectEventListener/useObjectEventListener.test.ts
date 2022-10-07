@@ -51,6 +51,21 @@ describe('useObjectEventListener', () => {
     });
   });
 
+  it("doesn't throw errors when receives nullish model", () => {
+    const handleNameChange = jest.fn(
+      // A regular function was used to allow context bound.
+      function handleNameChange(this: User) {
+        // Does nothing.
+      },
+    );
+
+    expect(() => {
+      renderHook(() => {
+        useObjectEventListener(null, 'rename', handleNameChange);
+      });
+    }).not.toThrowError();
+  });
+
   describe('when component unmounts', () => {
     it("stops listening the model's event", () => {
       const { unmount } = renderHook(() => {

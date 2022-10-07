@@ -70,4 +70,32 @@ describe('useModelAttributes', () => {
       expect(result.current.color).toBe('blue');
     });
   });
+
+  it("doesn't throws error when receives nullish model", () => {
+    type ModelAttributes = {
+      color?: string;
+    };
+
+    const { result } = renderHook(() =>
+      useModelAttributes<ModelAttributes>(null),
+    );
+
+    expect(result.current.color).toBeUndefined();
+
+    expect(() => {
+      act(() => {
+        result.current.color = 'red';
+      });
+    }).toThrowError();
+
+    expect(result.current.color).toBeUndefined();
+
+    expect(() => {
+      act(() => {
+        delete result.current.color;
+      });
+    }).toThrowError();
+
+    expect(result.current.color).toBeUndefined();
+  });
 });

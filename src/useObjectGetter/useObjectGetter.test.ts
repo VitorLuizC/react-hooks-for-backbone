@@ -35,6 +35,21 @@ describe('useBackboneGetter', () => {
 
       expect(result.current).toBe('Carlos Marcos');
     });
+
+    it("doesn't throw errors when receives nullish object", () => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const getter = jest.fn((_object: User | null) => {
+        return null;
+      });
+
+      renderHook(() => {
+        return useObjectGetter(getter, {
+          object: null,
+        });
+      });
+
+      expect(getter).toHaveBeenCalledWith(null);
+    });
   });
 
   describe('when watching an event', () => {

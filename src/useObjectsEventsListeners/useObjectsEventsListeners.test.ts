@@ -54,6 +54,20 @@ describe('useBackboneListenTo', () => {
     expect(handler).toHaveBeenCalledTimes(4);
   });
 
+  it("doesn't throw errors when receives nullish objects", () => {
+    expect(() => {
+      renderHook(() => {
+        useObjectsEventsListeners(
+          [
+            [null, 'change:name'],
+            [undefined, 'rename', 'update'],
+          ],
+          handler,
+        );
+      });
+    }).not.toThrowError();
+  });
+
   describe('when unmounts', () => {
     it('stops listening events', () => {
       const { unmount } = renderHook(() => {

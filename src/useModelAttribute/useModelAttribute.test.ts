@@ -47,6 +47,21 @@ describe('useModelAttribute', () => {
     expect(car.get('brand')).toBe('Porsche®');
   });
 
+  it("doesn't throws error when receives nullish model", () => {
+    const { result } = renderHook(() => {
+      return useModelAttribute<CarModelAttributes, 'brand'>({
+        name: 'brand',
+        model: undefined,
+      });
+    });
+
+    const setBrand = result.current[1];
+
+    act(() => setBrand('Porsche'));
+
+    expect(result.current[0]).toBeUndefined();
+  });
+
   describe('when watching events', () => {
     it("updates value when model's events are triggered", () => {
       const { result } = renderHook(() => {

@@ -31,14 +31,17 @@ import isEmptyObject from './isEmptyObject';
 function useModelAttributes<
   TAttributes extends object,
   TOptions extends Silenceable = ModelSetOptions,
->(model: Model<TAttributes, TOptions>, options?: TOptions): TAttributes {
+>(
+  model: Model<TAttributes, TOptions> | undefined | null,
+  options?: TOptions,
+): TAttributes {
   const [attributes, setAttributes] = useState<TAttributes>(getEmptyObject);
 
   const handleChange = useCallback(() => {
     setAttributes((previousAttributes) => {
       const changedAttributes = getChanges(
         previousAttributes,
-        model.attributes,
+        model?.attributes ?? {},
       );
 
       if (isEmptyObject(changedAttributes)) return previousAttributes;
@@ -52,6 +55,8 @@ function useModelAttributes<
   }, [model]);
 
   useEffect(() => {
+    if (!model) return;
+
     model.on('sync change', handleChange);
 
     return () => {
@@ -68,6 +73,8 @@ function useModelAttributes<
   const handlers = useMemo<ProxyHandler<TAttributes>>(() => {
     return {
       get(attributes, key) {
+        if (!model) return undefined;
+
         const attributeName = key as KeyOf<TAttributes>;
 
         if (attributeName in attributes) return attributes[attributeName];
@@ -85,7 +92,7 @@ function useModelAttributes<
 
         if (attributeName in attributes) attributes[attributeName] = value;
 
-        return Boolean(model.set(attributeName, value, options));
+        return Boolean(model?.set(attributeName, value, options));
       },
 
       deleteProperty(attributes, key) {
@@ -96,7 +103,7 @@ function useModelAttributes<
           // allowing the 'delete' statement with non-optional properties.
           attributes[attributeName] = undefined;
 
-        return Boolean(model.unset(attributeName, options));
+        return Boolean(model?.unset(attributeName, options));
       },
     };
   }, [model, handleChange]);
