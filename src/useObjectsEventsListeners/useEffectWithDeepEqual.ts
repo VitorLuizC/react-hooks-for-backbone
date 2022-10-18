@@ -1,5 +1,5 @@
 import { EffectCallback, useEffect, useRef } from 'react';
-import equal from 'fast-deep-equal';
+import equal from 'lodash.isequal';
 
 /**
  * React.js Hook that runs an effect but compare dependencies using the
