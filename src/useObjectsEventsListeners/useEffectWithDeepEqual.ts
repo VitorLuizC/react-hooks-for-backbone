@@ -3,7 +3,7 @@ import equal from 'lodash.isequal';
 
 /**
  * React.js Hook that runs an effect but compare dependencies using the
- * `fast-deep-equal` algorithm.
+ * `lodash.isequal` algorithm.
  */
 function useEffectWithDeepEqual(
   effect: EffectCallback,

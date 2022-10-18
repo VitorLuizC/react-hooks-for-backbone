@@ -73,7 +73,7 @@ const options = [
         format: 'esm',
       }),
     ],
-    external: [...BASE_OPTIONS.external, 'fast-deep-equal'],
+    external: [...BASE_OPTIONS.external, 'lodash.isequal'],
   },
   {
     ...BASE_OPTIONS,

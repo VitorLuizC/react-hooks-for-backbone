@@ -1,4 +1,4 @@
-import equal from 'fast-deep-equal';
+import equal from 'lodash.isequal';
 import type KeyOf from '../types/KeyOf';
 
 /** Gets the changes between two objects. */
