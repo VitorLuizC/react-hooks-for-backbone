@@ -39,4 +39,27 @@ describe('useEffectWithDeepEqual', () => {
 
     expect(effect).toHaveBeenCalledTimes(2);
   });
+
+  it("doesn't throw an error when receives cyclic object", () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const objectA: any = {};
+    objectA.object = objectA;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const objectB: any = {};
+    objectB.object = objectB;
+
+    const effect = jest.fn();
+
+    expect(() => {
+      const { rerender } = renderHook(
+        (object) => useEffectWithDeepEqual(effect, [object]),
+        {
+          initialProps: objectA,
+        },
+      );
+
+      rerender(objectB);
+    }).not.toThrowError();
+  });
 });
