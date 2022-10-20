@@ -3,15 +3,17 @@ import { Model } from 'backbone';
 import useModelAttributes from './useModelAttributes';
 
 describe('useModelAttributes', () => {
+  type ModelAttributes = {
+    color?: string;
+  };
+
+  let model: Model<ModelAttributes>;
+
+  beforeEach(() => {
+    model = new Model({ color: 'red' });
+  });
+
   describe('when deletes a property', () => {
-    type ModelAttributes = {
-      color?: string;
-    };
-
-    const model = new Model<ModelAttributes>({
-      color: 'red',
-    });
-
     it("unsets model's attribute", () => {
       const { result } = renderHook(() => useModelAttributes(model));
 
@@ -24,14 +26,6 @@ describe('useModelAttributes', () => {
   });
 
   describe('when gets a property', () => {
-    type ModelAttributes = {
-      color?: string;
-    };
-
-    const model = new Model<ModelAttributes>({
-      color: 'red',
-    });
-
     it("gets model's attribute", () => {
       const { result } = renderHook(() => useModelAttributes(model));
 
@@ -52,14 +46,6 @@ describe('useModelAttributes', () => {
   });
 
   describe('when sets a property', () => {
-    type ModelAttributes = {
-      color?: string;
-    };
-
-    const model = new Model<ModelAttributes>({
-      color: 'red',
-    });
-
     it("updates model's attribute", () => {
       const { result } = renderHook(() => useModelAttributes(model));
 
@@ -72,10 +58,6 @@ describe('useModelAttributes', () => {
   });
 
   it("doesn't throws error when receives nullish model", () => {
-    type ModelAttributes = {
-      color?: string;
-    };
-
     const { result } = renderHook(() =>
       useModelAttributes<ModelAttributes>(null),
     );
@@ -97,5 +79,14 @@ describe('useModelAttributes', () => {
     }).toThrowError();
 
     expect(result.current.color).toBeUndefined();
+  });
+
+  it("doesn't throws error when tries to access symbols", () => {
+    const { result } = renderHook(() => useModelAttributes(model));
+
+    // @ts-expect-error because 'Symbol.toStringTag' isn't declared as attribute
+    const string = result.current[Symbol.toStringTag];
+
+    expect(string).toBeUndefined();
   });
 });
