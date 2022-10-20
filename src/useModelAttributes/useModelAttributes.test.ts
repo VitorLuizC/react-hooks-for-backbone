@@ -57,7 +57,7 @@ describe('useModelAttributes', () => {
     });
   });
 
-  it("doesn't throws error when receives nullish model", () => {
+  it("doesn't throws error when getting attributes from nullish model", () => {
     const { result } = renderHook(() =>
       useModelAttributes<ModelAttributes>(null),
     );
@@ -84,9 +84,23 @@ describe('useModelAttributes', () => {
   it("doesn't throws error when tries to access symbols", () => {
     const { result } = renderHook(() => useModelAttributes(model));
 
-    // @ts-expect-error because 'Symbol.toStringTag' isn't declared as attribute
+    // @ts-expect-error because 'Symbol.toStringTag' isn't an attribute
     const string = result.current[Symbol.toStringTag];
 
     expect(string).toBeUndefined();
+
+    expect(() => {
+      act(() => {
+        // @ts-expect-error because 'Symbol.toStringTag' isn't an attribute
+        result.current[Symbol.toStringTag] = 'Model';
+      });
+    }).toThrowError();
+
+    expect(() => {
+      act(() => {
+        // @ts-expect-error because 'Symbol.toStringTag' isn't an attribute
+        delete result.current[Symbol.toStringTag];
+      });
+    }).toThrowError();
   });
 });

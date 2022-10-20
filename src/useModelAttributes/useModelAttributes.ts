@@ -73,7 +73,7 @@ function useModelAttributes<
   const handlers = useMemo<ProxyHandler<TAttributes>>(() => {
     return {
       get(attributes, key) {
-        if (!model) return undefined;
+        if (!model || typeof key === 'symbol') return undefined;
 
         const attributeName = key as KeyOf<TAttributes>;
 
@@ -88,6 +88,8 @@ function useModelAttributes<
       },
 
       set(attributes, key, value) {
+        if (typeof key === 'symbol') return false;
+
         const attributeName = key as KeyOf<TAttributes>;
 
         if (attributeName in attributes) attributes[attributeName] = value;
@@ -96,6 +98,8 @@ function useModelAttributes<
       },
 
       deleteProperty(attributes, key) {
+        if (typeof key === 'symbol') return false;
+
         const attributeName = key as KeyOf<TAttributes>;
 
         if (attributeName in attributes)
