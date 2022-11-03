@@ -92,7 +92,13 @@ function useModelAttributes<
 
         const attributeName = key as KeyOf<TAttributes>;
 
-        if (attributeName in attributes) attributes[attributeName] = value;
+        attributes[attributeName] = value;
+
+        setAttributes((attributes) => {
+          attributes[attributeName] = value;
+
+          return Object.assign(getEmptyObject(), attributes);
+        });
 
         return Boolean(model?.set(attributeName, value, options));
       },
@@ -102,10 +108,13 @@ function useModelAttributes<
 
         const attributeName = key as KeyOf<TAttributes>;
 
-        if (attributeName in attributes)
-          // @ts-expect-error but TypeScript already handles this by not
-          // allowing the 'delete' statement with non-optional properties.
-          attributes[attributeName] = undefined;
+        delete attributes[attributeName];
+
+        setAttributes((attributes) => {
+          delete attributes[attributeName];
+
+          return Object.assign(getEmptyObject(), attributes);
+        });
 
         return Boolean(model?.unset(attributeName, options));
       },

@@ -103,4 +103,27 @@ describe('useModelAttributes', () => {
       });
     }).toThrowError();
   });
+
+  it('updates the state when sets or deletes an attribute', () => {
+    let updates = 0;
+
+    const { result } = renderHook(() => {
+      updates++;
+      return useModelAttributes(model);
+    });
+
+    expect(updates).toBe(1);
+
+    act(() => {
+      result.current.color = 'blue';
+    });
+
+    expect(updates).toBe(2);
+
+    act(() => {
+      delete result.current.color;
+    });
+
+    expect(updates).toBe(3);
+  });
 });
