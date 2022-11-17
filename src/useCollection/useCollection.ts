@@ -1,5 +1,3 @@
-// @ts-check
-
 import type { Collection, Model } from 'backbone';
 import { useObjectGetter } from '../useObjectGetter';
 import type { ObjectEvents, ObjectsEvents } from '../useObjectsEventsListeners';
