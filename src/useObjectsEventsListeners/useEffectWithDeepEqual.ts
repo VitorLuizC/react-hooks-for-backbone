@@ -9,15 +9,12 @@ function useEffectWithDeepEqual(
   effect: EffectCallback,
   dependencies: unknown[],
 ) {
-  const previousDependenciesRef = useRef<unknown[]>();
+  const dependenciesRef = useRef(dependencies);
 
-  useEffect(() => {
-    if (equal(dependencies, previousDependenciesRef.current)) return;
+  if (!equal(dependencies, dependenciesRef.current))
+    dependenciesRef.current = dependencies;
 
-    previousDependenciesRef.current = dependencies;
-
-    return effect();
-  }, dependencies);
+  useEffect(effect, dependenciesRef.current);
 }
 
 export default useEffectWithDeepEqual;

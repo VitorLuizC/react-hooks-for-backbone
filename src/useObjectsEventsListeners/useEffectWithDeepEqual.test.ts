@@ -40,6 +40,27 @@ describe('useEffectWithDeepEqual', () => {
     expect(effect).toHaveBeenCalledTimes(2);
   });
 
+  it("doesn't cleanup if dependencies array are equals previous one", () => {
+    const cleanup = jest.fn();
+
+    const { rerender } = renderHook(
+      (dependencies) => useEffectWithDeepEqual(() => cleanup, dependencies),
+      {
+        initialProps: [true, [1, 2, 3]],
+      },
+    );
+
+    expect(cleanup).not.toHaveBeenCalled();
+
+    rerender([true, [1, 2, 3]]);
+
+    expect(cleanup).not.toHaveBeenCalled();
+
+    rerender([true, [1, 2]]);
+
+    expect(cleanup).toHaveBeenCalled();
+  });
+
   it("doesn't throw an error when receives cyclic object", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const objectA: any = {};
