@@ -10,6 +10,7 @@ React.js Hooks for Backbone.js
 - [KeyOf](README.md#keyof)
 - [ObjectEvents](README.md#objectevents)
 - [ObjectsEvents](README.md#objectsevents)
+- [UseCollectionOptions](README.md#usecollectionoptions)
 - [UseModelAttributeOptions](README.md#usemodelattributeoptions)
 - [UseModelAttributeSet](README.md#usemodelattributeset)
 - [UseObjectGetterFunction](README.md#useobjectgetterfunction)
@@ -17,6 +18,7 @@ React.js Hooks for Backbone.js
 
 ### Functions
 
+- [useCollection](README.md#usecollection)
 - [useModelAttribute](README.md#usemodelattribute)
 - [useModelAttributes](README.md#usemodelattributes)
 - [useObjectEventListener](README.md#useobjecteventlistener)
@@ -51,7 +53,7 @@ as a constructor in TypeScript's type system.
 
 #### Defined in
 
-[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/types/AnyFunction.ts#L8)
+[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/types/AnyFunction.ts#L8)
 
 ___
 
@@ -69,7 +71,7 @@ Union between string keys of received object.
 
 #### Defined in
 
-[types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/types/KeyOf.ts#L2)
+[types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/types/KeyOf.ts#L2)
 
 ___
 
@@ -95,7 +97,7 @@ const subject: ObjectEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
 
 ___
 
@@ -118,7 +120,36 @@ const subjects: ObjectsEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:42](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L42)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:42](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L42)
+
+___
+
+### UseCollectionOptions
+
+Ƭ **UseCollectionOptions**: `Object`
+
+Object that contains the collection, a list of events and a list of related
+events from other objects to watch in order to keep it synchronized.
+
+**`Example`**
+
+```ts
+const options: UseCollectionOptions = {
+  watchEvents: ['add', 'sync', 'remove'],
+  watchRelatedEvents: [permissions, 'change:add_users'],
+};
+```
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `watchEvents?` | `string`[] | Events to watch from the collection. Defaults to `['update']`. |
+| `watchRelatedEvents?` | [`ObjectEvents`](README.md#objectevents) \| [`ObjectsEvents`](README.md#objectsevents) | - |
+
+#### Defined in
+
+[useCollection/useCollection.ts:18](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useCollection/useCollection.ts#L18)
 
 ___
 
@@ -158,7 +189,7 @@ const options = {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useModelAttribute/useModelAttribute.ts#L62)
+[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttribute/useModelAttribute.ts#L62)
 
 ___
 
@@ -215,7 +246,7 @@ setUserName((previousName) => previousName?.trim() ?? 'Uknown', {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useModelAttribute/useModelAttribute.ts#L37)
+[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttribute/useModelAttribute.ts#L37)
 
 ___
 
@@ -261,7 +292,7 @@ getAvatar = (user, app) => {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useObjectGetter/useObjectGetter.ts#L25)
+[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectGetter/useObjectGetter.ts#L25)
 
 ___
 
@@ -301,9 +332,72 @@ const options: UseObjectGetterOptions<Model<User>, [AppDetails]> = {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useObjectGetter/useObjectGetter.ts#L46)
+[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectGetter/useObjectGetter.ts#L46)
 
 ## Functions
+
+### useCollection
+
+▸ **useCollection**<`TModel`\>(`collection`, `options?`): `TModel`[]
+
+React.js Hook that provides an array of Backbone Models from a collection. It
+also watches received events from the collection and related objects to keep
+the array synchronized with the collection.
+
+By default it watches the `"update"` event, but it can be overridden.
+
+**`Example`**
+
+Using the hook to sync component with the collection and its models' names.
+
+```jsx
+useCollection(users, { watchEvents: ['change:name', 'update'] });
+
+return <ListUsersNames usersNames={users.collect('name')} />;
+```
+
+**`Example`**
+
+Using the array returned by the hook to show the collection's models.
+
+```jsx
+const friends = useCollection(user.friends(), {
+  watchRelatedEvents: [user, 'change:friends_ids'],
+});
+
+return (
+  <ul className="UserFriendsList">
+    {!friends.length && <UserFriendsListEmpty />}
+
+    {friends.map((friend) => (
+      <UserFriendsListItem key={friend.id} friend={friend} />
+    ))}
+  </ul>
+)
+```
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TModel` | extends `Model`<`any`, `ModelSetOptions`, `any`, `TModel`\> = `Model`<`any`, `ModelSetOptions`, `any`\> |
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `collection` | `Collection`<`TModel`\> |
+| `options` | [`UseCollectionOptions`](README.md#usecollectionoptions) |
+
+#### Returns
+
+`TModel`[]
+
+#### Defined in
+
+[useCollection/useCollection.ts:61](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useCollection/useCollection.ts#L61)
+
+___
 
 ### useModelAttribute
 
@@ -352,7 +446,7 @@ return <input value={name} onChange={handleChange} />;
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useModelAttribute/useModelAttribute.ts#L98)
+[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttribute/useModelAttribute.ts#L98)
 
 ___
 
@@ -401,7 +495,7 @@ return (
 
 #### Defined in
 
-[useModelAttributes/useModelAttributes.ts:31](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useModelAttributes/useModelAttributes.ts#L31)
+[useModelAttributes/useModelAttributes.ts:31](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttributes/useModelAttributes.ts#L31)
 
 ___
 
@@ -441,7 +535,7 @@ useObjectEventListener(user, ['change'], function (this: UserModel) {
 
 #### Defined in
 
-[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useObjectEventListener/useObjectEventListener.ts#L19)
+[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectEventListener/useObjectEventListener.ts#L19)
 
 ___
 
@@ -497,7 +591,7 @@ const fullName = useObjectGetter(getFullName, {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useObjectGetter/useObjectGetter.ts#L84)
+[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectGetter/useObjectGetter.ts#L84)
 
 ___
 
@@ -540,4 +634,4 @@ useObjectsEventsListeners(
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/5b47fc6/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L67)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L67)
