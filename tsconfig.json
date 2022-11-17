@@ -9,7 +9,7 @@
 
     // Strictness and quality settings.
     "alwaysStrict": true,
-    "exactOptionalPropertyTypes": true,
+    "exactOptionalPropertyTypes": false,
     "forceConsistentCasingInFileNames": true,
     "importsNotUsedAsValues": "error",
     "noFallthroughCasesInSwitch": true,
