@@ -1,5 +1,5 @@
 import type { Events } from 'backbone';
-import type AnyFunction from '../types/AnyFunction';
+import type { AnyFunction } from '../types';
 import { useHandler } from '../useHandler';
 import useEffectWithDeepEqual from './useEffectWithDeepEqual';
 

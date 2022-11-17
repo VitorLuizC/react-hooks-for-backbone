@@ -1,4 +1,4 @@
-import type AnyModel from '../types/AnyModel';
+import type { AnyModel } from '../types';
 
 /** Gets the change event name for the model's attribute. */
 function getChangeEvent(model: AnyModel, attributeName: string): string {

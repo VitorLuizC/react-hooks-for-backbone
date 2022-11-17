@@ -1,5 +1,5 @@
 import equal from 'lodash.isequal';
-import type KeyOf from '../types/KeyOf';
+import type { KeyOf } from '../types';
 
 /** Gets the changes between two objects. */
 function getChanges<TObject extends object>(

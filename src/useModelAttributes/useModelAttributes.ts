@@ -1,6 +1,6 @@
 import type { Model, ModelSetOptions, Silenceable } from 'backbone';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type KeyOf from '../types/KeyOf';
+import type { KeyOf } from '../types';
 import getEmptyObject from './createEmptyObject';
 import getChangeEvent from '../utils/getChangeEvent';
 import getChanges from './getChanges';

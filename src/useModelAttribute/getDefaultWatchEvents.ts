@@ -1,5 +1,5 @@
 import getChangeEvent from '../utils/getChangeEvent';
-import type AnyModel from '../types/AnyModel';
+import type { AnyModel } from '../types';
 
 /** Gets the default events' names for model's attributes. */
 function getDefaultWatchEvents(

@@ -1,6 +1,6 @@
 import type { Model, ModelSetOptions } from 'backbone';
 import { useCallback, useMemo, useState } from 'react';
-import type KeyOf from '../types/KeyOf';
+import type { KeyOf } from '../types';
 import { useObjectEventListener } from '../useObjectEventListener';
 import {
   ObjectEvents,

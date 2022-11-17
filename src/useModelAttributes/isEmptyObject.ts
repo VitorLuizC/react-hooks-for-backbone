@@ -1,4 +1,4 @@
-import type EmptyObject from '../types/EmptyObject';
+import type { EmptyObject } from '../types';
 
 /** Checks if received object is empty. */
 function isEmptyObject(object: object): object is EmptyObject {

@@ -1,5 +1,4 @@
-export type { default as AnyFunction } from './types/AnyFunction';
-export type { default as KeyOf } from './types/KeyOf';
+export type { AnyFunction, KeyOf } from './types';
 
 export * from './useModelAttribute';
 export * from './useModelAttributes';
