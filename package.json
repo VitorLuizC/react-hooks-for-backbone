@@ -80,6 +80,7 @@
   },
   "homepage": "https://github.com/VitorLuizC/react-hooks-for-backbone#readme",
   "dependencies": {
+    "@types/jquery": "^3.5.16",
     "@types/lodash.isequal": "^4.5.6",
     "lodash.isequal": "^4.5.0"
   }
