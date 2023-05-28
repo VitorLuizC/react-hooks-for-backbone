@@ -1,8 +1,8 @@
-import getEmptyObject from './createEmptyObject';
+import createEmptyObject from './createEmptyObject';
 
-describe('getEmptyObject', () => {
+describe('createEmptyObject', () => {
   it('creates an empty object', () => {
-    const object = getEmptyObject();
+    const object = createEmptyObject();
 
     expect(object).not.toBeInstanceOf(Object);
     expect(object).toEqual({});

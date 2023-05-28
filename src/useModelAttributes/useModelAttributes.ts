@@ -1,7 +1,7 @@
 import type { Model, ModelSetOptions, Silenceable } from 'backbone';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { KeyOf } from '../types';
-import getEmptyObject from './createEmptyObject';
+import createEmptyObject from '../utils/createEmptyObject';
 import getChangeEvent from '../utils/getChangeEvent';
 import getChanges from './getChanges';
 import isEmptyObject from './isEmptyObject';
@@ -35,7 +35,7 @@ function useModelAttributes<
   model: Model<TAttributes, TOptions> | undefined | null,
   options?: TOptions,
 ): TAttributes {
-  const [attributes, setAttributes] = useState<TAttributes>(getEmptyObject);
+  const [attributes, setAttributes] = useState<TAttributes>(createEmptyObject);
 
   const handleChange = useCallback(() => {
     setAttributes((previousAttributes) => {
@@ -47,7 +47,7 @@ function useModelAttributes<
       if (isEmptyObject(changedAttributes)) return previousAttributes;
 
       return Object.assign(
-        getEmptyObject(),
+        createEmptyObject(),
         previousAttributes,
         changedAttributes,
       );
@@ -97,7 +97,7 @@ function useModelAttributes<
         setAttributes((attributes) => {
           attributes[attributeName] = value;
 
-          return Object.assign(getEmptyObject(), attributes);
+          return Object.assign(createEmptyObject(), attributes);
         });
 
         return Boolean(model?.set(attributeName, value, options));
@@ -113,7 +113,7 @@ function useModelAttributes<
         setAttributes((attributes) => {
           delete attributes[attributeName];
 
-          return Object.assign(getEmptyObject(), attributes);
+          return Object.assign(createEmptyObject(), attributes);
         });
 
         return Boolean(model?.unset(attributeName, options));
