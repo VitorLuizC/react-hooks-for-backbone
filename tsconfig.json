@@ -11,7 +11,7 @@
     "alwaysStrict": true,
     "exactOptionalPropertyTypes": false,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
