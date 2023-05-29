@@ -8,6 +8,10 @@ React.js Hooks for Backbone.js
 
 - [AnyFunction](README.md#anyfunction)
 - [KeyOf](README.md#keyof)
+- [ObjectAsyncMethod](README.md#objectasyncmethod)
+- [ObjectAsyncMethodExecute](README.md#objectasyncmethodexecute)
+- [ObjectAsyncMethodKey](README.md#objectasyncmethodkey)
+- [ObjectAsyncMethods](README.md#objectasyncmethods)
 - [ObjectEvents](README.md#objectevents)
 - [ObjectsEvents](README.md#objectsevents)
 - [UseCollectionOptions](README.md#usecollectionoptions)
@@ -53,7 +57,7 @@ as a constructor in TypeScript's type system.
 
 #### Defined in
 
-[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/types/AnyFunction.ts#L8)
+[types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/types/AnyFunction.ts#L8)
 
 ___
 
@@ -71,7 +75,85 @@ Union between string keys of received object.
 
 #### Defined in
 
-[types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/types/KeyOf.ts#L2)
+[types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/types/KeyOf.ts#L2)
+
+___
+
+### ObjectAsyncMethod
+
+Ƭ **ObjectAsyncMethod**<`TAsyncMethod`\>: { `error`: ``null`` ; `execute`: [`ObjectAsyncMethodExecute`](README.md#objectasyncmethodexecute)<`TAsyncMethod`\> ; `result`: ``null`` ; `status`: ``"idle"``  } \| { `error`: `Error` ; `execute`: [`ObjectAsyncMethodExecute`](README.md#objectasyncmethodexecute)<`TAsyncMethod`\> ; `result`: ``null`` ; `status`: ``"failed"``  } \| { `error`: `Error` \| ``null`` ; `execute`: [`ObjectAsyncMethodExecute`](README.md#objectasyncmethodexecute)<`TAsyncMethod`\> ; `result`: `ObjectAsyncMethodResult`<`TAsyncMethod`\> \| ``null`` ; `status`: ``"pending"``  } \| { `error`: ``null`` ; `execute`: [`ObjectAsyncMethodExecute`](README.md#objectasyncmethodexecute)<`TAsyncMethod`\> ; `result`: `ObjectAsyncMethodResult`<`TAsyncMethod`\> ; `status`: ``"completed"``  }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TAsyncMethod` | extends `AnyAsyncFunction` |
+
+#### Defined in
+
+[useObjectAsyncMethods/useObjectAsyncMethods.ts:17](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectAsyncMethods/useObjectAsyncMethods.ts#L17)
+
+___
+
+### ObjectAsyncMethodExecute
+
+Ƭ **ObjectAsyncMethodExecute**<`TAsyncMethod`\>: (...`args`: `Parameters`<`TAsyncMethod`\>) => `Promise`<`ObjectAsyncMethodResult`<`TAsyncMethod`\>\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TAsyncMethod` | extends `AnyAsyncFunction` |
+
+#### Type declaration
+
+▸ (...`args`): `Promise`<`ObjectAsyncMethodResult`<`TAsyncMethod`\>\>
+
+##### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `...args` | `Parameters`<`TAsyncMethod`\> |
+
+##### Returns
+
+`Promise`<`ObjectAsyncMethodResult`<`TAsyncMethod`\>\>
+
+#### Defined in
+
+[useObjectAsyncMethods/useObjectAsyncMethods.ts:13](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectAsyncMethods/useObjectAsyncMethods.ts#L13)
+
+___
+
+### ObjectAsyncMethodKey
+
+Ƭ **ObjectAsyncMethodKey**<`TObject`\>: { readonly [TObjectKey in KeyOf<TObject\>]: TObject[TObjectKey] extends AnyAsyncFunction ? TObjectKey : never }[[`KeyOf`](README.md#keyof)<`TObject`\>]
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TObject` | extends `object` |
+
+#### Defined in
+
+[useObjectAsyncMethods/useObjectAsyncMethods.ts:7](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectAsyncMethods/useObjectAsyncMethods.ts#L7)
+
+___
+
+### ObjectAsyncMethods
+
+Ƭ **ObjectAsyncMethods**<`TObject`\>: { readonly [TObjectKey in ObjectAsyncMethodKey<TObject\>]: TObject[TObjectKey] extends AnyAsyncFunction ? ObjectAsyncMethod<TObject[TObjectKey]\> : never }
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `TObject` | extends `object` |
+
+#### Defined in
+
+[useObjectAsyncMethods/useObjectAsyncMethods.ts:43](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectAsyncMethods/useObjectAsyncMethods.ts#L43)
 
 ___
 
@@ -97,7 +179,7 @@ const subject: ObjectEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:23](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L23)
 
 ___
 
@@ -120,7 +202,7 @@ const subjects: ObjectsEvents = [
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:42](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L42)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:42](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L42)
 
 ___
 
@@ -149,7 +231,7 @@ const options: UseCollectionOptions = {
 
 #### Defined in
 
-[useCollection/useCollection.ts:18](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useCollection/useCollection.ts#L18)
+[useCollection/useCollection.ts:18](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useCollection/useCollection.ts#L18)
 
 ___
 
@@ -189,7 +271,7 @@ const options = {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttribute/useModelAttribute.ts#L62)
+[useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useModelAttribute/useModelAttribute.ts#L62)
 
 ___
 
@@ -246,7 +328,7 @@ setUserName((previousName) => previousName?.trim() ?? 'Uknown', {
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttribute/useModelAttribute.ts#L37)
+[useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useModelAttribute/useModelAttribute.ts#L37)
 
 ___
 
@@ -292,7 +374,7 @@ getAvatar = (user, app) => {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectGetter/useObjectGetter.ts#L25)
+[useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectGetter/useObjectGetter.ts#L25)
 
 ___
 
@@ -332,7 +414,7 @@ const options: UseObjectGetterOptions<Model<User>, [AppDetails]> = {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectGetter/useObjectGetter.ts#L46)
+[useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectGetter/useObjectGetter.ts#L46)
 
 ## Functions
 
@@ -395,7 +477,7 @@ return (
 
 #### Defined in
 
-[useCollection/useCollection.ts:61](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useCollection/useCollection.ts#L61)
+[useCollection/useCollection.ts:61](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useCollection/useCollection.ts#L61)
 
 ___
 
@@ -446,7 +528,7 @@ return <input value={name} onChange={handleChange} />;
 
 #### Defined in
 
-[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttribute/useModelAttribute.ts#L98)
+[useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useModelAttribute/useModelAttribute.ts#L98)
 
 ___
 
@@ -495,7 +577,7 @@ return (
 
 #### Defined in
 
-[useModelAttributes/useModelAttributes.ts:31](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useModelAttributes/useModelAttributes.ts#L31)
+[useModelAttributes/useModelAttributes.ts:31](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useModelAttributes/useModelAttributes.ts#L31)
 
 ___
 
@@ -535,7 +617,7 @@ useObjectEventListener(user, ['change'], function (this: UserModel) {
 
 #### Defined in
 
-[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectEventListener/useObjectEventListener.ts#L19)
+[useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectEventListener/useObjectEventListener.ts#L19)
 
 ___
 
@@ -591,7 +673,7 @@ const fullName = useObjectGetter(getFullName, {
 
 #### Defined in
 
-[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectGetter/useObjectGetter.ts#L84)
+[useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectGetter/useObjectGetter.ts#L84)
 
 ___
 
@@ -634,4 +716,4 @@ useObjectsEventsListeners(
 
 #### Defined in
 
-[useObjectsEventsListeners/useObjectsEventsListeners.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/4b0d9dd/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L67)
+[useObjectsEventsListeners/useObjectsEventsListeners.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/ba78e6f/src/useObjectsEventsListeners/useObjectsEventsListeners.ts#L67)
