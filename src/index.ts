@@ -1,4 +1,4 @@
-export type { AnyFunction, KeyOf } from './types';
+export type { AnyAsyncFunction, AnyFunction, KeyOf } from './types';
 
 export * from './useCollection';
 export * from './useModelAttribute';
