@@ -5,4 +5,5 @@ export type {
   ObjectAsyncMethods,
   ObjectAsyncMethodExecute,
 } from './useObjectAsyncMethods';
+export type { default as ObjectAsyncMethodState } from './ObjectAsyncMethodState';
 export type { default as ObjectAsyncMethodResult } from './ObjectAsyncMethodResult';

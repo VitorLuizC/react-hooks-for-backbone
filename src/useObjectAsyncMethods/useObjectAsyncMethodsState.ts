@@ -2,13 +2,8 @@ import { useMemo, useReducer } from 'react';
 import createEmptyObject from '../utils/createEmptyObject';
 import type { AnyAsyncFunction, KeyOf } from '../types';
 import type ObjectAsyncMethodResult from './ObjectAsyncMethodResult';
+import type ObjectAsyncMethodState from './ObjectAsyncMethodState';
 import ObjectAsyncMethodError from './ObjectAsyncMethodError';
-
-/** State for the object async method. */
-export type ObjectAsyncMethodState<TResult> =
-  | { status: 'failed'; error: Error; result: null }
-  | { status: 'pending'; error: Error | null; result: TResult | null }
-  | { status: 'completed'; error: null; result: TResult };
 
 /** State for the object async methods. */
 export type ObjectAsyncMethodsState<TObject extends object> = {

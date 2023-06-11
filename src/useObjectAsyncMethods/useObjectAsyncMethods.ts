@@ -3,6 +3,7 @@ import type { AnyAsyncFunction, KeyOf } from '../types';
 import createEmptyObject from '../utils/createEmptyObject';
 import type ObjectAsyncMethodResult from './ObjectAsyncMethodResult';
 import useObjectAsyncMethodsState from './useObjectAsyncMethodsState';
+import type ObjectAsyncMethodState from './ObjectAsyncMethodState';
 
 export type ObjectAsyncMethodKey<TObject extends object> = {
   readonly [TObjectKey in KeyOf<TObject>]: TObject[TObjectKey] extends AnyAsyncFunction
@@ -15,30 +16,9 @@ export type ObjectAsyncMethodExecute<TAsyncMethod extends AnyAsyncFunction> = (
 ) => Promise<ObjectAsyncMethodResult<TAsyncMethod>>;
 
 export type ObjectAsyncMethod<TAsyncMethod extends AnyAsyncFunction> =
-  | {
-      readonly error: null;
-      readonly result: null;
-      readonly status: 'idle';
-      readonly execute: ObjectAsyncMethodExecute<TAsyncMethod>;
-    }
-  | {
-      readonly error: Error;
-      readonly result: null;
-      readonly status: 'failed';
-      readonly execute: ObjectAsyncMethodExecute<TAsyncMethod>;
-    }
-  | {
-      readonly error: Error | null;
-      readonly result: ObjectAsyncMethodResult<TAsyncMethod> | null;
-      readonly status: 'pending';
-      readonly execute: ObjectAsyncMethodExecute<TAsyncMethod>;
-    }
-  | {
-      readonly error: null;
-      readonly result: ObjectAsyncMethodResult<TAsyncMethod>;
-      readonly status: 'completed';
-      readonly execute: ObjectAsyncMethodExecute<TAsyncMethod>;
-    };
+  ObjectAsyncMethodState<ObjectAsyncMethodResult<TAsyncMethod>> & {
+    readonly execute: ObjectAsyncMethodExecute<TAsyncMethod>;
+  };
 
 export type ObjectAsyncMethods<TObject extends object> = {
   readonly [TObjectKey in ObjectAsyncMethodKey<TObject>]: TObject[TObjectKey] extends AnyAsyncFunction
