@@ -1,24 +1,22 @@
-import { useMemo, useReducer } from 'react';
+import { useMemo, useReducer, Dispatch } from 'react';
 import createEmptyObject from '../utils/createEmptyObject';
-import type { AnyAsyncFunction, KeyOf } from '../types';
+import type { AnyAsyncFunction } from '../types';
 import type ObjectAsyncMethodResult from './ObjectAsyncMethodResult';
 import type ObjectAsyncMethodState from './ObjectAsyncMethodState';
 import ObjectAsyncMethodError from './ObjectAsyncMethodError';
+import { ObjectAsyncMethodKey } from './isObjectAsyncMethodKey';
 
-/** State for the object async methods. */
 export type ObjectAsyncMethodsState<TObject extends object> = {
-  [TObjectKey in KeyOf<TObject>]?: TObject[TObjectKey] extends AnyAsyncFunction
+  [TObjectKey in ObjectAsyncMethodKey<TObject>]?: TObject[TObjectKey] extends AnyAsyncFunction
     ? ObjectAsyncMethodState<ObjectAsyncMethodResult<TObject[TObjectKey]>>
     : never;
 };
 
-/** Union between actions for the object async methods. */
 export type ObjectAsyncMethodsAction<TObject extends object> =
-  | { type: 'FAILED'; key: KeyOf<TObject>; cause: unknown }
-  | { type: 'STARTED'; key: KeyOf<TObject> }
-  | { type: 'COMPLETED'; key: KeyOf<TObject>; result: unknown };
+  | { type: 'FAILED'; key: ObjectAsyncMethodKey<TObject>; cause: unknown }
+  | { type: 'STARTED'; key: ObjectAsyncMethodKey<TObject> }
+  | { type: 'COMPLETED'; key: ObjectAsyncMethodKey<TObject>; result: unknown };
 
-/** Reducer for the object async methods. */
 function reducer<TObject extends object>(
   state: ObjectAsyncMethodsState<TObject>,
   action: ObjectAsyncMethodsAction<TObject>,
@@ -57,9 +55,19 @@ function reducer<TObject extends object>(
   }
 }
 
-function useObjectAsyncMethodsState<TObject extends object>(object: TObject) {
+export type ObjectAsyncMethodsDispatch<TObject extends object> =
+  // Just the regular 'Dispatch' with object async methods actions.
+  Dispatch<ObjectAsyncMethodsAction<TObject>>;
+
+function useObjectAsyncMethodsState<TObject extends object>(
+  object: TObject,
+): readonly [
+  state: ObjectAsyncMethodsState<TObject>,
+  dispatch: ObjectAsyncMethodsDispatch<TObject>,
+] {
   const state = useMemo(
-    // It's an empty object, only filled when async methods are called.
+    // It's created as empty object. The properties are only defined when object
+    // async methods are executed.
     createEmptyObject<ObjectAsyncMethodsState<TObject>>,
     [object],
   );

@@ -1,24 +1,31 @@
 /** State of an object async method. */
 type ObjectAsyncMethodState<TResult> =
   | {
-      readonly error: null;
-      readonly result: null;
-      readonly status: 'idle';
+      error: null;
+      result: null;
+      status: 'idle';
     }
   | {
-      readonly error: Error;
-      readonly result: null;
-      readonly status: 'failed';
+      error: Error;
+      result: null;
+      status: 'failed';
     }
   | {
-      readonly error: Error | null;
-      readonly result: TResult | null;
-      readonly status: 'pending';
+      error: Error | null;
+      result: TResult | null;
+      status: 'pending';
     }
   | {
-      readonly error: null;
-      readonly result: TResult;
-      readonly status: 'completed';
+      error: null;
+      result: TResult;
+      status: 'completed';
     };
+
+export const INITIAL_OBJECT_ASYNC_METHOD_STATE: ObjectAsyncMethodState<never> =
+  {
+    error: null,
+    result: null,
+    status: 'idle',
+  };
 
 export default ObjectAsyncMethodState;

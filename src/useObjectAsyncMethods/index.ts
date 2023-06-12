@@ -1,9 +1,9 @@
 export { default as useObjectAsyncMethods } from './useObjectAsyncMethods';
 export type {
   ObjectAsyncMethod,
-  ObjectAsyncMethodKey,
   ObjectAsyncMethods,
-  ObjectAsyncMethodExecute,
 } from './useObjectAsyncMethods';
+export type { ObjectAsyncMethodExecute } from './createObjectAsyncMethodExecute';
+export type { ObjectAsyncMethodKey } from './isObjectAsyncMethodKey';
 export type { default as ObjectAsyncMethodState } from './ObjectAsyncMethodState';
 export type { default as ObjectAsyncMethodResult } from './ObjectAsyncMethodResult';

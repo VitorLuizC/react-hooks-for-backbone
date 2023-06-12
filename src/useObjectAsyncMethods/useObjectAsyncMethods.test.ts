@@ -99,7 +99,7 @@ describe('useObjectAsyncMethods', () => {
 
     // @ts-expect-error because symbols aren't allowed as indexes.
     expect(() => result.current[Symbol.iterator]).toThrowError(
-      'Can\'t get "Symbol(Symbol.iterator)" as async method',
+      'Can\'t handle "Symbol(Symbol.iterator)" as an async method',
     );
   });
 
@@ -113,7 +113,7 @@ describe('useObjectAsyncMethods', () => {
 
     // @ts-expect-error because non-async functions aren't allowed as indexes.
     expect(() => result.current.deferred).toThrowError(
-      'Can\'t get "deferred" as async method because it isn\'t a function',
+      'Can\'t handle "deferred" as an async method',
     );
   });
 });

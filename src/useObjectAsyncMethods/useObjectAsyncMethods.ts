@@ -1,88 +1,61 @@
 import { useMemo } from 'react';
-import type { AnyAsyncFunction, KeyOf } from '../types';
-import createEmptyObject from '../utils/createEmptyObject';
+import type { AnyAsyncFunction } from '../types';
 import type ObjectAsyncMethodResult from './ObjectAsyncMethodResult';
+import createEmptyObject from '../utils/createEmptyObject';
 import useObjectAsyncMethodsState from './useObjectAsyncMethodsState';
-import type ObjectAsyncMethodState from './ObjectAsyncMethodState';
-
-export type ObjectAsyncMethodKey<TObject extends object> = {
-  readonly [TObjectKey in KeyOf<TObject>]: TObject[TObjectKey] extends AnyAsyncFunction
-    ? TObjectKey
-    : never;
-}[KeyOf<TObject>];
-
-export type ObjectAsyncMethodExecute<TAsyncMethod extends AnyAsyncFunction> = (
-  ...args: Parameters<TAsyncMethod>
-) => Promise<ObjectAsyncMethodResult<TAsyncMethod>>;
+import isObjectAsyncMethodKey, {
+  ObjectAsyncMethodKey,
+} from './isObjectAsyncMethodKey';
+import createObjectAsyncMethodExecute, {
+  ObjectAsyncMethodExecute,
+} from './createObjectAsyncMethodExecute';
+import ObjectAsyncMethodState, {
+  INITIAL_OBJECT_ASYNC_METHOD_STATE,
+} from './ObjectAsyncMethodState';
 
 export type ObjectAsyncMethod<TAsyncMethod extends AnyAsyncFunction> =
   ObjectAsyncMethodState<ObjectAsyncMethodResult<TAsyncMethod>> & {
-    readonly execute: ObjectAsyncMethodExecute<TAsyncMethod>;
+    execute: ObjectAsyncMethodExecute<TAsyncMethod>;
   };
 
 export type ObjectAsyncMethods<TObject extends object> = {
-  readonly [TObjectKey in ObjectAsyncMethodKey<TObject>]: TObject[TObjectKey] extends AnyAsyncFunction
+  [TObjectKey in ObjectAsyncMethodKey<TObject>]: TObject[TObjectKey] extends AnyAsyncFunction
     ? ObjectAsyncMethod<TObject[TObjectKey]>
     : never;
 };
-
-function isObjectAsyncMethodKey<TObject extends object>(
-  object: TObject,
-  key: string,
-): key is KeyOf<TObject> {
-  return key in object && typeof object[key as keyof TObject] === 'function';
-}
 
 function useObjectAsyncMethods<TObject extends object>(
   object: TObject,
 ): ObjectAsyncMethods<TObject> {
   const [state, dispatch] = useObjectAsyncMethodsState(object);
 
+  // It persists the object async methods' 'execute' property.
+  const methods = useMemo(
+    () => createEmptyObject<ObjectAsyncMethods<TObject>>(),
+    [object],
+  );
+
   return useMemo(() => {
-    return new Proxy<ObjectAsyncMethods<TObject>>(createEmptyObject(), {
-      get(_, key) {
-        if (typeof key === 'symbol')
-          throw new Error(`Can't get "${String(key)}" as async method`);
+    return new Proxy<ObjectAsyncMethods<TObject>>(methods, {
+      get(methods, key) {
+        if (typeof key === 'symbol' || !isObjectAsyncMethodKey(object, key))
+          throw new Error(`Can't handle "${String(key)}" as an async method.`);
 
-        if (!isObjectAsyncMethodKey(object, key))
-          throw new Error(
-            `Can't get "${key}" as async method because it isn't a function`,
-          );
+        if (!methods[key]) {
+          // @ts-expect-error because conditional type can't be solved without
+          //                  a generic that represents the property value.
+          methods[key] = {
+            ...INITIAL_OBJECT_ASYNC_METHOD_STATE,
+            execute: createObjectAsyncMethodExecute(dispatch, object, key),
+          };
+        } else {
+          methods[key] = {
+            ...methods[key],
+            ...(state[key] ?? INITIAL_OBJECT_ASYNC_METHOD_STATE),
+          };
+        }
 
-        return {
-          error: state[key]?.error ?? null,
-          result: state[key]?.result ?? null,
-          status: state[key]?.status ?? 'idle',
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          async execute(...args: any[]) {
-            dispatch({
-              key,
-              type: 'STARTED',
-            });
-
-            try {
-              const result = await Promise.resolve(
-                (object[key] as AnyAsyncFunction).apply(object, args),
-              );
-
-              dispatch({
-                key,
-                result,
-                type: 'COMPLETED',
-              });
-
-              return result;
-            } catch (cause) {
-              dispatch({
-                key,
-                cause,
-                type: 'FAILED',
-              });
-
-              throw cause;
-            }
-          },
-        };
+        return methods[key];
       },
     });
   }, [state, object]);
