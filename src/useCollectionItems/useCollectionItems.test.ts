@@ -1,18 +1,18 @@
 import { act, renderHook } from '@testing-library/react';
 import { Collection, Model } from 'backbone';
-import useCollection from './useCollection';
+import useCollectionItems from './useCollectionItems';
 
 type UserAttributes = {
   name: string;
 };
 
-describe('useCollection', () => {
+describe('useCollectionItems', () => {
   const users = new Collection([
     new Model<UserAttributes>({ name: 'Vladimir' }),
   ]);
 
   it("returns collection's models", () => {
-    const { result } = renderHook(() => useCollection(users));
+    const { result } = renderHook(() => useCollectionItems(users));
 
     expect(result.current).toHaveLength(1);
     expect(result.current[0]).toBeInstanceOf(Model);
@@ -20,7 +20,7 @@ describe('useCollection', () => {
   });
 
   it('keeps in sync with the collection', () => {
-    const { result } = renderHook(() => useCollection(users));
+    const { result } = renderHook(() => useCollectionItems(users));
 
     expect(result.current).toHaveLength(1);
     expect(result.current[0]).toBeInstanceOf(Model);
@@ -53,7 +53,7 @@ describe('useCollection', () => {
     renderHook(() => {
       renders++;
 
-      useCollection(users, {
+      useCollectionItems(users, {
         watchEvents: ['change:name'],
         watchRelatedEvents: [permissions, 'change:add_users'],
       });

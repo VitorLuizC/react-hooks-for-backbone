@@ -15,7 +15,7 @@ import type { ObjectEvents, ObjectsEvents } from '../useObjectsEventsListeners';
  * };
  * ```
  */
-export type UseCollectionOptions = {
+export type UseCollectionItemsOptions = {
   /** Events to watch from the collection. Defaults to `['update']`. */
   watchEvents?: string[];
   watchRelatedEvents?: ObjectEvents | ObjectsEvents;
@@ -58,9 +58,9 @@ export type UseCollectionOptions = {
  * )
  * ```
  */
-function useCollection<TModel extends Model = Model>(
+function useCollectionItems<TModel extends Model = Model>(
   collection: Collection<TModel>,
-  options: UseCollectionOptions = {},
+  options: UseCollectionItemsOptions = {},
 ): TModel[] {
   const { watchEvents = ['update'], watchRelatedEvents } = options;
 
@@ -71,4 +71,4 @@ function useCollection<TModel extends Model = Model>(
   });
 }
 
-export default useCollection;
+export default useCollectionItems;
