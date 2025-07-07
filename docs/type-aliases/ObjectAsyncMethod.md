@@ -8,7 +8,7 @@
 
 > **ObjectAsyncMethod**\<`TAsyncMethod`\> = [`ObjectAsyncMethodState`](ObjectAsyncMethodState.md)\<[`ObjectAsyncMethodResult`](ObjectAsyncMethodResult.md)\<`TAsyncMethod`\>\> & `object`
 
-Defined in: [useObjectAsyncMethods/useObjectAsyncMethods.ts:16](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectAsyncMethods/useObjectAsyncMethods.ts#L16)
+Defined in: [useObjectAsyncMethods/useObjectAsyncMethods.ts:16](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectAsyncMethods/useObjectAsyncMethods.ts#L16)
 
 ## Type declaration
 

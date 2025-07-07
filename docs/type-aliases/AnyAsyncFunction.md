@@ -8,7 +8,7 @@
 
 > **AnyAsyncFunction** = (`this`, ...`args`) => `PromiseLike`\<`any`\>
 
-Defined in: [types/AnyAsyncFunction.ts:7](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/types/AnyAsyncFunction.ts#L7)
+Defined in: [types/AnyAsyncFunction.ts:7](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/types/AnyAsyncFunction.ts#L7)
 
 Function that has any context, arguments, and result in a 'PromiseLike'.
 

@@ -8,7 +8,7 @@
 
 > **useObjectEventListener**\<`TObject`\>(`object`, `eventOrEvents`, `callback`): `void`
 
-Defined in: [useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectEventListener/useObjectEventListener.ts#L19)
+Defined in: [useObjectEventListener/useObjectEventListener.ts:19](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectEventListener/useObjectEventListener.ts#L19)
 
 React.js Hook that listens object's events and executes the callback when
 they happen. The object can be a Backbone Model, a Backbone Collection or

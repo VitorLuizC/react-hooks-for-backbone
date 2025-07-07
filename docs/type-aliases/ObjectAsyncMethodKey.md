@@ -8,7 +8,7 @@
 
 > **ObjectAsyncMethodKey**\<`TObject`\> = `{ readonly [TObjectKey in KeyOf<TObject>]: TObject[TObjectKey] extends AnyAsyncFunction ? TObjectKey : never }`\[[`KeyOf`](KeyOf.md)\<`TObject`\>\]
 
-Defined in: [useObjectAsyncMethods/isObjectAsyncMethodKey.ts:4](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectAsyncMethods/isObjectAsyncMethodKey.ts#L4)
+Defined in: [useObjectAsyncMethods/isObjectAsyncMethodKey.ts:4](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectAsyncMethods/isObjectAsyncMethodKey.ts#L4)
 
 Union between object async method keys.
 

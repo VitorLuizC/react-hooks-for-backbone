@@ -8,7 +8,7 @@
 
 > **useCollectionItems**\<`TModel`\>(`collection`, `options`): `TModel`[]
 
-Defined in: [useCollectionItems/useCollectionItems.ts:61](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useCollectionItems/useCollectionItems.ts#L61)
+Defined in: [useCollectionItems/useCollectionItems.ts:61](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useCollectionItems/useCollectionItems.ts#L61)
 
 React.js Hook that provides an array of Backbone Models from a collection. It
 also watches received events from the collection and related objects to keep

@@ -8,7 +8,7 @@
 
 > **UseObjectGetterFunction**\<`TResult`, `TObject`, `TValues`\> = (`object`, ...`values`) => `TResult`
 
-Defined in: [useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectGetter/useObjectGetter.ts#L25)
+Defined in: [useObjectGetter/useObjectGetter.ts:25](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectGetter/useObjectGetter.ts#L25)
 
 Function that uses a model, or a collection, and a list of values as
 parameters to get the result.

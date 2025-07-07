@@ -8,7 +8,7 @@
 
 > **ObjectAsyncMethodExecute**\<`TAsyncMethod`\> = (...`args`) => `Promise`\<[`ObjectAsyncMethodResult`](ObjectAsyncMethodResult.md)\<`TAsyncMethod`\>\>
 
-Defined in: [useObjectAsyncMethods/createObjectAsyncMethodExecute.ts:6](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectAsyncMethods/createObjectAsyncMethodExecute.ts#L6)
+Defined in: [useObjectAsyncMethods/createObjectAsyncMethodExecute.ts:6](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectAsyncMethods/createObjectAsyncMethodExecute.ts#L6)
 
 ## Type Parameters
 

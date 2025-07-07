@@ -8,7 +8,7 @@
 
 > **UseModelAttributeSet**\<`TAttributes`, `TAttributeName`, `TOptions`\> = (`newValueOrFunction`, `options?`) => `void`
 
-Defined in: [useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useModelAttribute/useModelAttribute.ts#L37)
+Defined in: [useModelAttribute/useModelAttribute.ts:37](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useModelAttribute/useModelAttribute.ts#L37)
 
 Function that receives two arguments:
 - The first can be both the new attribute value, or a function that receives

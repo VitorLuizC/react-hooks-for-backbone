@@ -8,7 +8,7 @@
 
 > **useObjectGetter**\<`TResult`, `TObject`, `TValues`\>(`getter`, `options`): `TResult`
 
-Defined in: [useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectGetter/useObjectGetter.ts#L84)
+Defined in: [useObjectGetter/useObjectGetter.ts:84](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectGetter/useObjectGetter.ts#L84)
 
 React.js Hook that calculates a result derived from the received model, or
 collection, and the watched list of values. It's calculated on the

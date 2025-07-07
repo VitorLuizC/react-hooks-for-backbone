@@ -8,7 +8,7 @@
 
 > **KeyOf**\<`TObject`\> = `string` & keyof `TObject`
 
-Defined in: [types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/types/KeyOf.ts#L2)
+Defined in: [types/KeyOf.ts:2](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/types/KeyOf.ts#L2)
 
 Union between string keys of received object.
 

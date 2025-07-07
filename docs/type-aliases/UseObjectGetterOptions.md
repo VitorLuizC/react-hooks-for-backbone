@@ -8,7 +8,7 @@
 
 > **UseObjectGetterOptions**\<`TObject`, `TValues`\> = `object`
 
-Defined in: [useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectGetter/useObjectGetter.ts#L46)
+Defined in: [useObjectGetter/useObjectGetter.ts:46](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectGetter/useObjectGetter.ts#L46)
 
 Object that contains a model, or a acollection, and a list values and
 events to watch in order to get the result.
@@ -40,7 +40,7 @@ const options: UseObjectGetterOptions<Model<User>, [AppDetails]> = {
 
 > **object**: `TObject`
 
-Defined in: [useObjectGetter/useObjectGetter.ts:50](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectGetter/useObjectGetter.ts#L50)
+Defined in: [useObjectGetter/useObjectGetter.ts:50](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectGetter/useObjectGetter.ts#L50)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [useObjectGetter/useObjectGetter.ts:50](https://github.com/VitorLuiz
 
 > `optional` **watchEvents**: `string`[]
 
-Defined in: [useObjectGetter/useObjectGetter.ts:51](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectGetter/useObjectGetter.ts#L51)
+Defined in: [useObjectGetter/useObjectGetter.ts:51](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectGetter/useObjectGetter.ts#L51)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [useObjectGetter/useObjectGetter.ts:51](https://github.com/VitorLuiz
 
 > `optional` **watchRelatedEvents**: [`ObjectEvents`](ObjectEvents.md) \| [`ObjectsEvents`](ObjectsEvents.md)
 
-Defined in: [useObjectGetter/useObjectGetter.ts:53](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectGetter/useObjectGetter.ts#L53)
+Defined in: [useObjectGetter/useObjectGetter.ts:53](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectGetter/useObjectGetter.ts#L53)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [useObjectGetter/useObjectGetter.ts:53](https://github.com/VitorLuiz
 
 > `optional` **watchValues**: `TValues`
 
-Defined in: [useObjectGetter/useObjectGetter.ts:52](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useObjectGetter/useObjectGetter.ts#L52)
+Defined in: [useObjectGetter/useObjectGetter.ts:52](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useObjectGetter/useObjectGetter.ts#L52)

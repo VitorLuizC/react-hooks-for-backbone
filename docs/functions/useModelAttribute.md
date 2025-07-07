@@ -8,7 +8,7 @@
 
 > **useModelAttribute**\<`TAttributes`, `TAttributeName`, `TOptions`\>(`options`): \[`TAttributes`\[`TAttributeName`\], [`UseModelAttributeSet`](../type-aliases/UseModelAttributeSet.md)\<`TAttributes`, `TAttributeName`, `TOptions`\>\]
 
-Defined in: [useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useModelAttribute/useModelAttribute.ts#L98)
+Defined in: [useModelAttribute/useModelAttribute.ts:98](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useModelAttribute/useModelAttribute.ts#L98)
 
 React.js Hook that provides the Backbone Models' attribute value and a
 function to update it. It also watches received events to keep its value

@@ -8,7 +8,7 @@
 
 > **UseModelAttributeOptions**\<`TAttributes`, `TAttributeName`, `TOptions`\> = `object`
 
-Defined in: [useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useModelAttribute/useModelAttribute.ts#L62)
+Defined in: [useModelAttribute/useModelAttribute.ts:62](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useModelAttribute/useModelAttribute.ts#L62)
 
 Object that contains the attribute key, its model and a list of events to
 watch in order to keep its value synchronized.
@@ -43,7 +43,7 @@ const options = {
 
 > **model**: `Model`\<`TAttributes`, `TOptions`\> \| `undefined` \| `null`
 
-Defined in: [useModelAttribute/useModelAttribute.ts:68](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useModelAttribute/useModelAttribute.ts#L68)
+Defined in: [useModelAttribute/useModelAttribute.ts:68](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useModelAttribute/useModelAttribute.ts#L68)
 
 ***
 
@@ -51,7 +51,7 @@ Defined in: [useModelAttribute/useModelAttribute.ts:68](https://github.com/Vitor
 
 > **name**: `TAttributeName`
 
-Defined in: [useModelAttribute/useModelAttribute.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useModelAttribute/useModelAttribute.ts#L67)
+Defined in: [useModelAttribute/useModelAttribute.ts:67](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useModelAttribute/useModelAttribute.ts#L67)
 
 ***
 
@@ -59,7 +59,7 @@ Defined in: [useModelAttribute/useModelAttribute.ts:67](https://github.com/Vitor
 
 > `optional` **watchEvents**: `string`[]
 
-Defined in: [useModelAttribute/useModelAttribute.ts:69](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useModelAttribute/useModelAttribute.ts#L69)
+Defined in: [useModelAttribute/useModelAttribute.ts:69](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useModelAttribute/useModelAttribute.ts#L69)
 
 ***
 
@@ -67,4 +67,4 @@ Defined in: [useModelAttribute/useModelAttribute.ts:69](https://github.com/Vitor
 
 > `optional` **watchRelatedEvents**: [`ObjectEvents`](ObjectEvents.md) \| [`ObjectsEvents`](ObjectsEvents.md)
 
-Defined in: [useModelAttribute/useModelAttribute.ts:70](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useModelAttribute/useModelAttribute.ts#L70)
+Defined in: [useModelAttribute/useModelAttribute.ts:70](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useModelAttribute/useModelAttribute.ts#L70)

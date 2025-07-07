@@ -8,7 +8,7 @@
 
 > **AnyFunction** = (`this`, ...`args`) => `any`
 
-Defined in: [types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/types/AnyFunction.ts#L8)
+Defined in: [types/AnyFunction.ts:8](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/types/AnyFunction.ts#L8)
 
 Function that has any context, arguments, and result.
 

@@ -8,7 +8,7 @@
 
 > **UseCollectionItemsOptions** = `object`
 
-Defined in: [useCollectionItems/useCollectionItems.ts:18](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useCollectionItems/useCollectionItems.ts#L18)
+Defined in: [useCollectionItems/useCollectionItems.ts:18](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useCollectionItems/useCollectionItems.ts#L18)
 
 Object that contains the collection, a list of events and a list of related
 events from other objects to watch in order to keep it synchronized.
@@ -28,7 +28,7 @@ const options: UseCollectionOptions = {
 
 > `optional` **watchEvents**: `string`[]
 
-Defined in: [useCollectionItems/useCollectionItems.ts:20](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useCollectionItems/useCollectionItems.ts#L20)
+Defined in: [useCollectionItems/useCollectionItems.ts:20](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useCollectionItems/useCollectionItems.ts#L20)
 
 Events to watch from the collection. Defaults to `['update']`.
 
@@ -38,4 +38,4 @@ Events to watch from the collection. Defaults to `['update']`.
 
 > `optional` **watchRelatedEvents**: [`ObjectEvents`](ObjectEvents.md) \| [`ObjectsEvents`](ObjectsEvents.md)
 
-Defined in: [useCollectionItems/useCollectionItems.ts:21](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/974b445f407913593ca526d1771534f66ee4519c/src/useCollectionItems/useCollectionItems.ts#L21)
+Defined in: [useCollectionItems/useCollectionItems.ts:21](https://github.com/VitorLuizC/react-hooks-for-backbone/blob/c933913f34e3d71aa5132aba125ed14cc1ec398d/src/useCollectionItems/useCollectionItems.ts#L21)
