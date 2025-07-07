@@ -35,4 +35,3 @@ pnpmfile.js
 
 # Generated bundles and type definitions.
 /dist
-/types

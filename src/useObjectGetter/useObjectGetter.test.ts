@@ -14,8 +14,6 @@ describe('useBackboneGetter', () => {
   });
 
   const getFullName = (user: User): string => {
-    /* eslint-disable @typescript-eslint/no-non-null-assertion */
-
     const firstName = user.get('firstName')!;
     const lastName = user.get('lastName')!;
     return firstName.concat(' ', lastName);

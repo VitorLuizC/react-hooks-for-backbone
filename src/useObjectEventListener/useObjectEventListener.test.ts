@@ -63,7 +63,7 @@ describe('useObjectEventListener', () => {
       renderHook(() => {
         useObjectEventListener(null, 'rename', handleNameChange);
       });
-    }).not.toThrowError();
+    }).not.toThrow();
   });
 
   describe('when component unmounts', () => {

@@ -1,9 +1,11 @@
 // @ts-check
 /* eslint-env node */
 
+/** @import { Options } from 'prettier' */
+
 /**
  * An object with Prettier.js options.
- * @type {import('prettier').Options}
+ * @type {Options}
  */
 const options = {
   bracketSameLine: true,
@@ -12,4 +14,4 @@ const options = {
   trailingComma: 'all',
 };
 
-module.exports = options;
+export default options;

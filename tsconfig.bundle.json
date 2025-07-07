@@ -2,8 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     // Transpilation settings.
-    "module": "ES2020",
-    "target": "ES2015",
+    "module": "preserve",
+    "target": "es2017",
 
     // Output settings.
     "newLine": "LF",
@@ -11,7 +11,7 @@
 
     // Type declaration settings.
     "declaration": true,
-    "declarationDir": "types/",
+    "declarationDir": "dist/types",
     "declarationMap": true
   },
   "exclude": ["./src/**/*.test.ts", "./src/**/*.test.tsx"]

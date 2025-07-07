@@ -65,7 +65,7 @@ describe('useBackboneListenTo', () => {
           handler,
         );
       });
-    }).not.toThrowError();
+    }).not.toThrow();
   });
 
   describe('when unmounts', () => {

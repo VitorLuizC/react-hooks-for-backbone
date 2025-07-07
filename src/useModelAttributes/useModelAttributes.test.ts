@@ -68,7 +68,7 @@ describe('useModelAttributes', () => {
       act(() => {
         result.current.color = 'red';
       });
-    }).toThrowError();
+    }).toThrow();
 
     expect(result.current.color).toBeUndefined();
 
@@ -76,7 +76,7 @@ describe('useModelAttributes', () => {
       act(() => {
         delete result.current.color;
       });
-    }).toThrowError();
+    }).toThrow();
 
     expect(result.current.color).toBeUndefined();
   });
@@ -94,14 +94,14 @@ describe('useModelAttributes', () => {
         // @ts-expect-error because 'Symbol.toStringTag' isn't an attribute
         result.current[Symbol.toStringTag] = 'Model';
       });
-    }).toThrowError();
+    }).toThrow();
 
     expect(() => {
       act(() => {
         // @ts-expect-error because 'Symbol.toStringTag' isn't an attribute
         delete result.current[Symbol.toStringTag];
       });
-    }).toThrowError();
+    }).toThrow();
   });
 
   it('updates the state when sets or deletes an attribute', () => {

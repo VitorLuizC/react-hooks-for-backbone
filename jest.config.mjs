@@ -1,9 +1,11 @@
 // @ts-check
 /* eslint-env node */
 
+/** @import { Config } from '@jest/types' */
+
 /**
  * An object with Jest options.
- * @type {import('@jest/types').Config.InitialOptions}
+ * @type {Config.InitialOptions}
  */
 const options = {
   preset: 'ts-jest',
@@ -11,4 +13,4 @@ const options = {
   testEnvironment: 'jsdom',
 };
 
-module.exports = options;
+export default options;

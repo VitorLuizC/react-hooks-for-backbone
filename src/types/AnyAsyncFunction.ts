@@ -6,4 +6,4 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyAsyncFunction = (this: any, ...args: any) => PromiseLike<any>;
 
-export default AnyAsyncFunction
+export default AnyAsyncFunction;

@@ -4,7 +4,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "moduleResolution": "node",
+    "module": "preserve",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
 
     // Strictness and quality settings.
@@ -22,8 +23,8 @@
     "strict": true,
 
     // Type-checking settings.
-    "lib": ["ES2022"],
-    "target": "ES2015",
+    "lib": ["es2024"],
+    "target": "es2017",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "types": ["jest"]

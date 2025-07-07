@@ -3,8 +3,7 @@
 import terser from '@rollup/plugin-terser';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript2 from 'rollup-plugin-typescript2';
-
+import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json' with { type: 'json' };
 
 /**
@@ -39,9 +38,7 @@ function createOutputOptions(options) {
 const BASE_OPTIONS = {
   input: './src/index.ts',
   plugins: [
-    typescript2({
-      clean: true,
-      useTsconfigDeclarationDir: true,
+    typescript({
       tsconfig: './tsconfig.bundle.json',
     }),
   ],

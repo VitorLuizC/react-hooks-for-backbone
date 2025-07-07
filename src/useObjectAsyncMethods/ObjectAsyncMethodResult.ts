@@ -10,8 +10,8 @@ type ObjectAsyncMethodResult<TAsyncMethod extends AnyAsyncFunction> =
     ? TPromise extends JQuery.jqXHR<infer TResult>
       ? TResult
       : TPromise extends PromiseLike<infer TResult>
-      ? TResult
-      : unknown
+        ? TResult
+        : unknown
     : unknown;
 
 export default ObjectAsyncMethodResult;

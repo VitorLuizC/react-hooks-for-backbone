@@ -35,7 +35,7 @@ function useHandler<THandler extends AnyFunction>(handler: THandler): THandler {
   function executeHandler(this: ThisType<THandler>) {
     // 'Function.prototype.apply' requires an ArrayLike, so 'arguments' is fine.
     // eslint-disable-next-line prefer-rest-params
-    return handlerRef.current.apply(this, arguments as Parameters<THandler>);
+    return handlerRef.current.apply(this, arguments as unknown as Parameters<THandler>);
   }
 
   return useCallback<THandler>(executeHandler as THandler, []);

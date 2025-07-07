@@ -81,6 +81,6 @@ describe('useEffectWithDeepEqual', () => {
       );
 
       rerender(objectB);
-    }).not.toThrowError();
+    }).not.toThrow();
   });
 });
