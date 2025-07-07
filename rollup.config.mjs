@@ -40,6 +40,7 @@ const BASE_OPTIONS = {
   plugins: [
     typescript({
       tsconfig: './tsconfig.bundle.json',
+      tslib: '^2.8.1',
     }),
   ],
   external: ['react'],
