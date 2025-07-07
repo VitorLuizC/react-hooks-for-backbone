@@ -19,7 +19,7 @@
   },
   "files": [
     "dist/",
-    "types/"
+    "docs/"
   ],
   "devDependencies": {
     "@bitty/deferred": "^0.2.0",
